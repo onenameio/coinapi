@@ -42,6 +42,7 @@ class MtGoxAPI(ExchangeAPI):
 		ticker_data = self.ticker_data(target_currency, native_currency)['data']
 
 		ticker = {
+			'price_units': native_currency,
 			'volume': float(ticker_data['vol']['value_int']),
 			'bid': self.float_price(ticker_data['buy']['display']),
 			'ask': self.float_price(ticker_data['sell']['display']),
@@ -60,13 +61,21 @@ class BTCeAPI(ExchangeAPI):
 		self.name = 'btce'
 		self.BASE_URL = 'https://btc-e.com/api/2'
 		self.TICKER_ENDPOINTS = {
-			('btc', 'usd'): '/btc_usd/ticker'
+			('btc', 'usd'): '/btc_usd/ticker',
+			('ltc', 'usd'): '/ltc_usd/ticker',
+			('ltc', 'btc'): '/ltc_btc/ticker',
+			('nmc', 'btc'): '/nmc_btc/ticker',
+			('ppc', 'btc'): '/ppc_btc/ticker',
+			('xpm', 'btc'): '/xpm_btc/ticker',
+			('nvc', 'btc'): '/nvc_btc/ticker',
+			('trc', 'btc'): '/trc_btc/ticker',
 		}
 
 	def ticker(self, target_currency, native_currency):
 		ticker_data = self.ticker_data(target_currency, native_currency)['ticker']
 
 		ticker = {
+			'price_units': native_currency,
 			'volume': float(ticker_data['vol']),
 			'bid': ticker_data['buy'],
 			'ask': ticker_data['sell'],
@@ -91,6 +100,7 @@ class BitstampAPI(ExchangeAPI):
 		ticker_data = self.ticker_data(target_currency, native_currency)
 
 		ticker = {
+			'price_units': native_currency,
 			'volume': float(ticker_data['volume']),
 			'bid': self.float_price(ticker_data['bid']),
 			'ask': self.float_price(ticker_data['ask']),
