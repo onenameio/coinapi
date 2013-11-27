@@ -113,7 +113,7 @@ class BitstampAPI(ExchangeAPI):
 
 @app.route('/')
 def index():
-	return render_temfplate('index.html')
+	return render_template('index.html')
 
 @app.route('/tickers/<target_currency>_<native_currency>')
 def all_exchanges(target_currency, native_currency):
