@@ -5,24 +5,26 @@
 </head>
 <body>
 	<div>
-		<h1>
-			The Coin API
-		</h1>
+		<h1>The Coin API</h1>
 	</div>
-	<h3>BTC/USD</h3>
+	<h3>BTC/USD Across Exchanges</h3>
+	{% for exchange in exchanges %}
 	<div>
-		<a href="/tickers/mtgox/btc_usd">Mt. Gox</a>
+		<a href="/tickers/{{ exchange.slug }}/btc_usd">{{ exchange.name }}</a>
 	</div>
+	{% endfor %}
+	{% for exchange in exchanges %}
+	<h3>{{ exchange.name }}</h3>
+		{% for endpoint_key in exchange.TICKER_ENDPOINTS %}
+		<div>
+			<a href="/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}">{{endpoint_key[0]}}/{{endpoint_key[1]}}</a>
+		</div>
+		{% endfor %}
+	{% endfor %}
+	<!--<h3>BTC-e</h3>
 	<div>
-		<a href="/tickers/bitstamp/btc_usd">Bitstamp</a>
+		<a href="/tickers/btce/btc_usd">BTC/USD</a>
 	</div>
-	<div>
-		<a href="/tickers/btce/btc_usd">BTC-e</a>
-	</div>
-	<div>
-		<a href="/tickers/btc_usd">All exchanges</a>
-	</div>
-	<h3>Alt-coins on BTC-e</h3>
 	<div>
 		<a href="/tickers/btce/ltc_usd">LTC/USD</a>
 	</div>
@@ -38,5 +40,15 @@
 	<div>
 		<a href="/tickers/btce/xpm_btc">XPM/BTC</a>
 	</div>
+		<h3>Kraken</h3>
+	<div>
+		<a href="/tickers/kraken/btc_usd">BTC/USD</a>
+	</div>
+	<div>
+		<a href="/tickers/kraken/nmc_usd">NMC/USD</a>
+	</div>
+	<div>
+		<a href="/tickers/kraken/ltc_usd">LTC/USD</a>
+	</div>-->
 </body>
 </html>

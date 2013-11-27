@@ -32,7 +32,8 @@ class ExchangeAPI(object):
 
 class MtGoxAPI(ExchangeAPI):
 	def __init__(self):
-		self.name = 'mtgox'
+		self.name = 'Mt. Gox'
+		self.slug = 'mtgox'
 		self.BASE_URL = 'http://data.mtgox.com/api/2'
 		self.TICKER_ENDPOINTS = {
 			('btc', 'usd'): '/BTCUSD/money/ticker'
@@ -58,7 +59,8 @@ class MtGoxAPI(ExchangeAPI):
 
 class BTCeAPI(ExchangeAPI):
 	def __init__(self):
-		self.name = 'btce'
+		self.name = 'BTC-e'
+		self.slug = 'btce'
 		self.BASE_URL = 'https://btc-e.com/api/2'
 		self.TICKER_ENDPOINTS = {
 			('btc', 'usd'): '/btc_usd/ticker',
@@ -90,7 +92,8 @@ class BTCeAPI(ExchangeAPI):
 
 class BitstampAPI(ExchangeAPI):
 	def __init__(self):
-		self.name = 'bitstamp'
+		self.name = 'Bitstamp'
+		self.slug = 'bitstamp'
 		self.BASE_URL = 'https://www.bitstamp.net/api'
 		self.TICKER_ENDPOINTS = {
 			('btc', 'usd'): '/ticker/'
@@ -111,17 +114,51 @@ class BitstampAPI(ExchangeAPI):
 
 		return ticker
 
+class KrakenAPI(ExchangeAPI):
+	def __init__(self):
+		self.name = 'Kraken'
+		self.slug = 'kraken'
+		self.BASE_URL = 'https://api.kraken.com/0/public'
+		self.TICKER_ENDPOINTS = {
+			('btc', 'usd'): '/Ticker?pair=XXBTZUSD',
+			('nmc', 'usd'): '/Ticker?pair=XNMCZUSD',
+			('ltc', 'usd'): '/Ticker?pair=XLTCZUSD',
+			('btc', 'nmc'): '/Ticker?pair=XXBTXNMC',
+		}
+
+	def ticker(self, target_currency, native_currency):
+		ticker_data = self.ticker_data(target_currency, native_currency)
+		print ticker_data
+
+		endpoint_name = self.TICKER_ENDPOINTS.get((target_currency, native_currency))
+		pair_name = endpoint_name.strip('/Ticker?pair=')
+		ticker_data = ticker_data['result'][pair_name]
+
+		ticker = {
+			'price_units': native_currency,
+			'volume': self.float_price(ticker_data['v'][0]),
+			'bid': self.float_price(ticker_data['b'][0]),
+			'ask': self.float_price(ticker_data['a'][0]),
+			'high': self.float_price(ticker_data['h'][0]),
+			'low': self.float_price(ticker_data['l'][0]),			
+			'average': self.float_price(ticker_data['p'][0]),
+		}
+
+		return ticker
+
+EXCHANGE_APIS = [MtGoxAPI(), BTCeAPI(), BitstampAPI(), KrakenAPI()]
+
 @app.route('/')
 def index():
-	return render_template('index.html')
+	return render_template('index.html', exchanges=EXCHANGE_APIS)
 
 @app.route('/tickers/<target_currency>_<native_currency>')
 def all_exchanges(target_currency, native_currency):
 	data = {}
-	exchanges = [MtGoxAPI(), BTCeAPI(), BitstampAPI()]
-	for exchange in exchanges:
+	
+	for exchange in EXCHANGE_APIS:
 		exchange_data = exchange.ticker(target_currency, native_currency)
-		data[exchange.name] = exchange_data
+		data[exchange.slug] = exchange_data
 
 	return jsonify(data), 200
 
@@ -133,6 +170,8 @@ def single_exchange(exchange, target_currency, native_currency):
 		exchange_api = BTCeAPI()
 	elif exchange == 'bitstamp':
 		exchange_api = BitstampAPI()
+	elif exchange == 'kraken':
+		exchange_api = KrakenAPI()
 	else:
 		abort(404)
 
@@ -143,8 +182,8 @@ def single_exchange(exchange, target_currency, native_currency):
 	else:
 		return jsonify({'error': 'did not get a proper response'}), 500
 
-@app.errorhandler(Exception)
-def basic_error_handler(e):
-	return jsonify({'error': 'there was a problem with the server'}), 500
+#@app.errorhandler(Exception)
+#def basic_error_handler(e):
+#	return jsonify({'error': 'there was a problem with the server'}), 500
 
 
