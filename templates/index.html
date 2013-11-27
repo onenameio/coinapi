@@ -9,9 +9,11 @@
 	</div>
 	<h3>BTC/USD Across Exchanges</h3>
 	{% for exchange in exchanges %}
-	<div>
-		<a href="/tickers/{{ exchange.slug }}/btc_usd">{{ exchange.name }}</a>
-	</div>
+		{% if ('btc', 'usd') in exchange.TICKER_ENDPOINTS %}
+		<div>
+			<a href="/tickers/{{ exchange.slug }}/btc_usd">{{ exchange.name }}</a>
+		</div>
+		{% endif %}
 	{% endfor %}
 	{% for exchange in exchanges %}
 	<h3>{{ exchange.name }}</h3>
@@ -21,34 +23,5 @@
 		</div>
 		{% endfor %}
 	{% endfor %}
-	<!--<h3>BTC-e</h3>
-	<div>
-		<a href="/tickers/btce/btc_usd">BTC/USD</a>
-	</div>
-	<div>
-		<a href="/tickers/btce/ltc_usd">LTC/USD</a>
-	</div>
-	<div>
-		<a href="/tickers/btce/ltc_btc">LTC/BTC</a>
-	</div>
-	<div>
-		<a href="/tickers/btce/nmc_btc">NMC/BTC</a>
-	</div>
-	<div>
-		<a href="/tickers/btce/ppc_btc">PPC/BTC</a>
-	</div>
-	<div>
-		<a href="/tickers/btce/xpm_btc">XPM/BTC</a>
-	</div>
-		<h3>Kraken</h3>
-	<div>
-		<a href="/tickers/kraken/btc_usd">BTC/USD</a>
-	</div>
-	<div>
-		<a href="/tickers/kraken/nmc_usd">NMC/USD</a>
-	</div>
-	<div>
-		<a href="/tickers/kraken/ltc_usd">LTC/USD</a>
-	</div>-->
 </body>
 </html>
