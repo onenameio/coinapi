@@ -14,7 +14,6 @@ class ExchangeAPI(object):
 
 	def ticker_data(self, target_currency, native_currency):
 		ticker_endpoint = self.TICKER_ENDPOINTS.get((target_currency, native_currency))
-		print ticker_endpoint
 		if ticker_endpoint:
 			r = requests.get(self.BASE_URL + ticker_endpoint)
 		else:
@@ -125,7 +124,6 @@ class KrakenAPI(ExchangeAPI):
 
 	def ticker(self, target_currency, native_currency):
 		ticker_data = self.ticker_data(target_currency, native_currency)
-		print ticker_data
 
 		endpoint_name = self.TICKER_ENDPOINTS.get((target_currency, native_currency))
 		pair_name = endpoint_name.strip('/Ticker?pair=')
@@ -167,4 +165,27 @@ class BTCChinaAPI(ExchangeAPI):
 
 		return ticker
 
+class BitfinexAPI(ExchangeAPI):
+	def __init__(self):
+		self.name = 'Bitfinex'
+		self.slug = 'bitfinex'
+		self.BASE_URL = 'https://api.bitfinex.com/v1'
+		self.TICKER_ENDPOINTS = {
+			('btc', 'usd'): '/ticker/btcusd',
+			('ltc', 'usd'): '/ticker/ltcusd',
+			('ltc', 'btc'): '/ticker/ltcbtc',
+		}
+
+	def ticker(self, target_currency, native_currency):
+		ticker_data = self.ticker_data(target_currency, native_currency)
+
+		ticker = {
+			'price_units': native_currency,
+			'bid': self.float_price(ticker_data['bid']),
+			'ask': self.float_price(ticker_data['ask']),
+			'last': self.float_price(ticker_data['last_price']),
+			'timestamp': int(float(ticker_data['timestamp'])),
+		}
+
+		return ticker
 
