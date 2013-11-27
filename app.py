@@ -43,7 +43,7 @@ class MtGoxAPI(ExchangeAPI):
 
 		ticker = {
 			'price_units': native_currency,
-			'volume': float(ticker_data['vol']['value_int']),
+			'vol': float(ticker_data['vol']['value_int']),
 			'bid': self.float_price(ticker_data['buy']['display']),
 			'ask': self.float_price(ticker_data['sell']['display']),
 			'high': self.float_price(ticker_data['high']['display']),
@@ -76,7 +76,7 @@ class BTCeAPI(ExchangeAPI):
 
 		ticker = {
 			'price_units': native_currency,
-			'volume': float(ticker_data['vol']),
+			'vol': float(ticker_data['vol']),
 			'bid': ticker_data['buy'],
 			'ask': ticker_data['sell'],
 			'high': ticker_data['high'],
@@ -113,7 +113,7 @@ class BitstampAPI(ExchangeAPI):
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+	return render_temfplate('index.html')
 
 @app.route('/tickers/<target_currency>_<native_currency>')
 def all_exchanges(target_currency, native_currency):
