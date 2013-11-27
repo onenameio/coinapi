@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Help - API documentation{% endblock %}
+
+{% block rightnav %}
+<li><a href="/">Home</a></li>
+<li><a href="/tree">Tree</a></li>
+<li class="active"><a href="/help">Help</a></li>
+{% endblock %}
+
+{% block main %}
+<article class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            {{ macros.sidebar() }}
+        </div><!--/.span3 -->
+        
+        
+        <div class="span9">
+            <div class="doc-content-box">
+                <h1 class="heading">How This Documentation Is Organized</h1>
+                <p>Lorem ipsum dolor sit amet, vivamus commodo, tortor morbi faucibus eleifend, gravida et vitae lobortis, sociis sed consectetuer. Et suspendisse commodo sapien, mauris habitasse venenatis tincidunt, non ante cupiditate enim fusce magni lacinia. Erat et feugiat felis iaculis sed justo, mauris pretium dapibus lacinia adipiscing. Leo neque id, nec posuere in, pede a interdum vitae quam nec rhoncus, sit id cras curabitur libero ante, nibh accumsan et in augue purus habitasse. Nunc amet ultrices ac suscipit elementum. Donec commodo est erat mauris quam vestibulum, vel lectus vehicula sed, massa wisi vel purus sed, fames mauris ante id tortor quam.</p>
+
+
+                <h2>Overview</h2>
+                <blockquote><p>Aliquam dui rhoncus ut ipsum suspendisse, vitae quam eget felis class nulla, pede risus dolor auctor nibh, vivamus pellentesque nam et pulvinar architecto lorem, risus eu volutpat felis molestie. Egestas amet augue justo semper interdum dui, eros nec dictumst molestie lacinia magna, libero eget, sed a, elit tortor vitae morbi. Mi nec cumque arcu, nam sed, congue arcu facilis wisi nec iaculis, neque adipiscing nisl ullamcorper mattis. Sit varius erat, at proin volutpat, enim rutrum ut, nullam vestibulum suspendisse lorem maecenas.</p></blockquote>
+
+                <h2>Class</h2>
+                <blockquote><p>In faucibus enim mauris faucibus pharetra fames, enim ullamcorper lacus tempor sed, nec adipiscing suspendisse wisi habitasse quis et. Varius amet facilisis auctor nullam diam accumsan, phasellus ac interdum lacus, lorem proin fringilla ac, ut velit et vel lorem nec, id proin et vestibulum metus rhoncus eget. Dictum odio natoque amet, id eu proin in. Mi dignissim non molestie fusce, pellentesque massa, accumsan cras eu maecenas fusce vitae. Nunc in orci mattis aenean duis. Fermentum odio, quis praesent donec orci id vel ante, arcu amet, a natus turpis fringilla, vitae suspendisse sit ut sagittis dapibus non. Fusce ut dignissim id integer quam, leo imperdiet mauris wisi.</p></blockquote>
+
+                <h2>Index</h2>
+                <blockquote><p>Tellus in dui, etiam orci. Venenatis vivamus, amet ut. Aenean non nunc egestas, ut malesuada ultricies in rutrum iaculis, volutpat vivamus placerat, gravida nec dui nunc suscipit ipsum, enim aliquam. Ultrices vestibulum phasellus et lectus, quam vitae natoque suscipit, auctor ligula feugiat orci facilisis quasi, dis wisi lectus phasellus suscipit parturient, augue pulvinar feugiat inceptos. Consequat excepturi molestie odio auctor vehicula rhoncus, pede magna justo interdum aliquam donec.</p></blockquote>
+
+                <h2>Tree (Class Hierarchy)</h2>
+                <blockquote><p>Potenti dictum diam dui pulvinar ante, nullam luctus euismod egestas justo ullamcorper a, lectus id, eget hymenaeos consectetuer ut purus nibh, mi dui tincidunt bibendum dictumst in quis. Justo lacinia nulla a ut, id maecenas, suspendisse suspendisse. Lorem suscipit vitae id luctus donec ut, sed id quis sapien vehicula nulla quis. Leo erat nisl et nulla faucibus, vestibulum pretium, mauris sapien a eros dictumst amet suspendisse, sociosqu aliquam massa amet ligula eleifend, sodales tellus magna in nunc porta gravida.</p></blockquote>
+
+                <h2>Prev/Next</h2>
+                <blockquote><p>Lorem ipsum dolor sit amet, vivamus commodo, tortor morbi faucibus eleifend, gravida et vitae lobortis, sociis sed consectetuer. Et suspendisse commodo sapien, mauris habitasse venenatis tincidunt, non ante cupiditate enim fusce magni lacinia. Erat et feugiat felis iaculis sed justo, mauris pretium dapibus lacinia adipiscing. Leo neque id, nec posuere in, pede a interdum vitae quam nec rhoncus, sit id cras curabitur libero ante, nibh accumsan et in augue purus habitasse.</p></blockquote>
+                <div class="shadow-right"> </div><!-- shadow doc-content-box -->
+            </div><!--/.doc-content-box -->
+        </div><!--/.span9 -->
+    </div><!--/.row-fluid -->
+</article>
+{% endblock %}

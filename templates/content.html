@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block title %}Class Name - API documentation{% endblock %}
+
+{% block rightnav %}
+<li><a href="/">Home</a></li>
+<li><a href="/tree">Tree</a></li>
+<li><a href="/help">Help</a></li>
+{% endblock %}
+
+{% block main %}
+<article class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <!--sidebar -->
+            <ul class="nav nav-tabs nav-stacked">
+                <li><a href="content.html"><i class="icon-chevron-right pull-right"></i> Get Started</a></li>
+                <li><a href="#"><i class="icon-chevron-right pull-right"></i> App Components</a></li>
+                <li><a href="#"><i class="icon-chevron-right pull-right"></i> User Interfaces</a></li>
+                <li><a href="#"><i class="icon-chevron-right pull-right"></i> Form Elements</a></li>
+                <li><a href="#"><i class="icon-chevron-right pull-right"></i> Animation</a></li>
+                <li><a href="#"><i class="icon-chevron-right pull-right"></i> Graphic</a></li>
+                <li><a href="#"><i class="icon-chevron-right pull-right"></i> Example</a></li>
+                <li><a href="#"><i class="icon-chevron-right pull-right"></i> Something else</a></li>
+            </ul><!--/.sidebar -->
+        </div><!--/.span3 -->
+
+        <div class="span9">
+            <div class="doc-content-box">
+                <!-- Class Overview -->
+                <div class="page-header">
+                    <h2>Class Class_Name Overview</h2>
+                </div>
+                
+                <p>Lorem ipsum dolor sit amet, varius lectus est nec, wisi in mauris nec dictum urna dolor, risus in sit vestibulum lobortis. Lacinia donec eget neque nec, lobortis aenean vestibulum consectetuer wisi, at suscipit diam sed dolor varius dui. Lorem faucibus habitasse lobortis sociis dis, imperdiet lacus lacus ac, aperiam gravida parturient arcu vivamus. Ut risus. Dapibus porttitor dolor urna metus, tortor rhoncus consectetuer eu erat id in, lectus nunc vitae, non luctus mollis mauris. Hendrerit at ut sed in, pharetra accumsan nibh. Aliquet a at. Semper fusce velit, luctus eu mattis sodales hymenaeos nec in, amet suspendisse dolor mauris blandit leo, vel et ac amet sodales.
+                </p><!-- /Class Overview -->
+
+                <!-- table Class Summary -->
+                <table class="table table-bordered ">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Class Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="class-summary">
+                            <td>
+                                <p class="class-scope">public</p>
+                            </td>
+                            <td>
+                                <a href="#class-desc" class="scroll class-name">Class_Name</a> 
+                                <p class="class-desc">Lorem ipsum dolor sit amet, arcu libero molestie justo sit egestas, ut augue suspendisse massa, nec libero, pede magna eget.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table><!-- /table Class Summary -->
+                
+
+                <!-- table Property Summary -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Property Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="property-summary">
+                            <td><p class="class-scope">public</p></td>
+                            <td>
+                                <a href="#property-desc" class="scroll class-name">$var_name</a>
+                                <p class="class-desc">Lorem ipsum dolor sit amet, arcu libero molestie justo sit egestas, ut augue suspendisse massa, nec libero, pede magna eget.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table><!-- /table Property Summary -->
+                
+
+                <!-- table Constructor Summary -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Constructor Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="constructor-summary">
+                            <td><p class="class-scope">public</p></td>
+                            <td>
+                                <a href="#constructor-desc" class="scroll class-name">self::__construct()</a> 
+                                <p class="class-desc">Lorem ipsum dolor sit amet, arcu libero molestie justo sit egestas, ut augue suspendisse massa, nec libero, pede magna eget.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table><!-- /table Constructor Summary -->
+                
+                
+                <!-- table Method Summary -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr id="method-summary">
+                            <th colspan="2">Method Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="method-set">
+                            <td><p class="class-scope">public</p></td>
+                            <td>
+                                <a href="#method-desc-set" class="scroll class-name">Class_Name->set()</a> 
+                                <p class="class-desc">Lorem ipsum dolor sit amet, arcu libero molestie justo sit egestas, ut augue suspendisse massa, nec libero, pede magna eget.</p>
+                            </td>
+                        </tr>
+                        <tr id="method-get">
+                            <td><p class="class-scope">public</p></td>
+                            <td>
+                                <a href="#method-desc-set" class="scroll class-name">Class_Name->get()</a> 
+                                <p class="class-desc">Lorem ipsum dolor sit amet, arcu libero molestie justo sit egestas, ut augue suspendisse massa, nec libero, pede magna eget.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table><!-- /table Method Summary -->
+                
+                
+                <!-- detail-box Class Detail -->
+                <div class="detail-box">
+                    <div class="page-header">
+                        <a title="jump to class summary" href="#class-summary" class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span> 
+                        </a>
+                        <h3 id="class-desc">Class Detail</h3>
+                    </div>
+                    <p class="lead class-name">Class_Name
+                        
+                    </p>
+                    <p class="det">Pede porttitor erat, ultricies et mattis accumsan, vel nec suspendisse diam egestas praesent. Etiam interdum ac id in risus erat, lacinia rhoncus diam tellus vel libero quod. Ac maecenas sed sit libero nunc vel, massa eget. Lectus congue a enim commodo. Lectus sit luctus, scelerisque duis pellentesque mauris integer velit.</p>
+                    <pre class="prettyprint linenums">
+$obj = new Class_Name();
+$obj->set('custom value');
+
+echo $obj->get();
+                    </pre>
+                </div><!-- /.detail-box Class Detail -->
+                
+                
+                <!-- detail-box Property Detail -->
+                <div class="detail-box">
+                    <div class="page-header">
+                        <a title="jump to property summary" href="#property-summary" class="scroll pull-right">
+                            <span class="label label-info"><b class="icon-white icon-arrow-up"></b></span> 
+                        </a>
+                        <h3 id="property-desc">Property Detail</h3>
+                    </div>
+                    <p class="lead class-name">$var_name</p>
+                    <pre class="prettyprint linenums">
+public $var_name = 'default value';
+                    </pre>
+                </div><!-- /.detail-box Property Detail -->
+                
+                
+                <!-- detail-box Constructor Detail -->
+                <div class="detail-box">
+                    <div class="page-header">
+                        <a title="jump to constructor summary" href="#constructor-summary" class="scroll pull-right">
+                            <span class="label label-info"><b class="icon-white icon-arrow-up"></b></span> 
+                        </a>
+                        <h3 id="constructor-desc">Constructor Detail</h3>
+                    </div>
+                    <p class="lead class-name">__construct()</p>
+                    <pre class="prettyprint linenums">
+function __conctruct()
+{
+// load the parent contstructor
+parent::__construct();
+}
+                    </pre>
+                </div> <!-- /.detail-box Constructor Detail -->
+                
+                
+                <!-- detail-box Method Detail -->
+                <div class="detail-box">
+                    <div class="page-header">
+                        <a title="jump to method summary" href="#method-set" class="scroll pull-right">
+                            <span class="label label-info"><b class="icon-white icon-arrow-up"></b></span> 
+                        </a>
+                        <h2 id="method-desc-set">Method Detail</h2>
+                    </div>
+                    <p class="lead class-name">set()</p>
+                    <p class="det">Pede porttitor erat, ultricies et mattis accumsan, vel nec suspendisse diam egestas praesent. Etiam interdum ac id in risus erat, lacinia rhoncus diam tellus vel libero quod. Ac maecenas sed sit libero nunc vel, massa eget. Lectus congue a enim commodo. Lectus sit luctus, scelerisque duis pellentesque mauris integer velit.</p>
+                    <pre class="prettyprint linenums">
+public function set($str)
+{
+// set property $var_name
+return $this->var_name = $str;
+}
+                    </pre>
+                    <p id="method-desc-set" class="lead class-name">get()
+                        <a title="jump to method summary" href="#method-get" class="scroll pull-right">
+                            <span class="label label-info"><b class="icon-white icon-arrow-up"></b></span> 
+                        </a>
+                    </p>
+                    <pre class="prettyprint linenums">
+public function get()
+{
+return $this->var_name; // get property $var_name
+}
+                    </pre>
+                </div><!--/.detail-box Method Detail-->
+                
+                
+                <!-- pagination -->
+                <div class="page-nav">
+                    <ul class="pager">
+                        <li class="previous">
+                            <a href="#">&larr; Prev Class</a>
+                        </li>
+                        <li class="next">
+                            <a href="#">Next Class &rarr;</a>
+                        </li>
+                    </ul>
+                </div><!-- /pagination -->
+                
+                
+                <div class="shadow-right"> </div><!-- shadow doc-content-box -->
+            </div><!--/.doc-content-box -->
+        </div><!--/.span9 -->
+    </div><!--/.row-fluid -->
+</article>
+{% endblock %}

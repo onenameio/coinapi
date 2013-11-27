@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Exchanges - API documentation{% endblock %}
+
+{% block rightnav %}
+{{ macros.rightnav() }}
+{% endblock %}
+
+{% block main %}
+<article class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            {{ macros.sidebar() }}
+        </div><!--/.span3 -->
+
+        <div class="span9">
+            <div class="doc-content-box">
+                <!-- Class Overview -->
+                <div class="page-header">
+                    <h2>Exchanges</h2>
+                </div>
+                
+                <p>A listing of all the exchanges supported by the CoinVibes API.
+                </p><!-- /Class Overview -->
+
+                {% for exchange in exchanges %}
+                <!-- table Class Summary -->
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th colspan="2">{{ exchange.name }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for endpoint_key in exchange.TICKER_ENDPOINTS %}
+                        <tr id="class-summary">
+                            <td style="width: 150px;">
+                                <p class="class-scope">{{endpoint_key[0]}}/{{endpoint_key[1]}}</p>
+                            </td>
+                            <td class="">
+                                <a href="/api/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}">/api/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}</a>
+                                <!--<p class="class-desc">
+                                    {{endpoint_key[0]}} -> {{endpoint_key[1]}}
+                                </p>-->
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table><!-- /table Class Summary -->
+                {% endfor %}             
+
+                <div class="shadow-right"> </div><!-- shadow doc-content-box -->
+            </div><!--/.doc-content-box -->
+        </div><!--/.span9 -->
+    </div><!--/.row-fluid -->
+</article>
+{% endblock %}

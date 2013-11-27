@@ -9,9 +9,34 @@ app = Flask(__name__)
 app.config.from_object('settings')
 
 EXCHANGE_APIS = [
-	MtGoxAPI(), BTCeAPI(), BitstampAPI(), KrakenAPI(), BTCChinaAPI(),
+	BitstampAPI(), MtGoxAPI(), BTCeAPI(), KrakenAPI(), BTCChinaAPI(),
 	BitfinexAPI()
 ]
+
+@app.route('/about')
+def about():
+	return render_template('about.html')
+
+@app.route('/exchanges')
+def exchanges():
+	return render_template('exchanges.html', exchanges=EXCHANGE_APIS)
+
+@app.route('/currencies')
+def currencies():
+	currency_pairs = [
+		{ 'name': 'Bitcoin / US Dollars', 'symbols': ('btc','usd') },
+		{ 'name': 'Bitcoin / Chinese Yuan', 'symbols': ('btc','cny') },
+		{ 'name': 'Litecoin / US Dollars', 'symbols': ('ltc','usd') },
+		{ 'name': 'Litecoin / Bitcoin', 'symbols': ('ltc','btc') },
+		{ 'name': 'Namecoin / US Dollars', 'symbols': ('nmc','usd') },
+		{ 'name': 'Namecoin / Bitcoin', 'symbols': ('nmc','btc') },
+		{ 'name': 'Peercoin / Bitcoin', 'symbols': ('ppc','btc') },
+		{ 'name': 'Primecoin / Bitcoin', 'symbols': ('xpm','btc') },
+		#{ 'name': 'Novacoin / Bitcoin', 'symbols': ('nvc','btc') },
+		#{ 'name': 'Terracoin / Bitcoin', 'symbols': ('trc','btc') },
+	]
+	return render_template('currencies.html', exchanges=EXCHANGE_APIS,
+						   currency_pairs=currency_pairs)
 
 @app.route('/')
 def index():
@@ -27,7 +52,7 @@ def all_exchanges(target_currency, native_currency):
 
 	return jsonify(data), 200"""
 
-@app.route('/tickers/<exchange>/<target_currency>_<native_currency>')
+@app.route('/api/tickers/<exchange>/<target_currency>_<native_currency>')
 def single_exchange(exchange, target_currency, native_currency):
 	if exchange == 'mtgox':
 		exchange_api = MtGoxAPI()
@@ -55,4 +80,19 @@ def single_exchange(exchange, target_currency, native_currency):
 def basic_error_handler(e):
 	traceback.print_exc()
 	return jsonify({'error': 'there was a problem with the server'}), 500
+
+
+
+# just for testing
+@app.route('/help')
+def help():
+	return render_template('help.html')
+
+@app.route('/tree')
+def tree():
+	return render_template('tree.html')
+
+@app.route('/content')
+def content():
+	return render_template('content.html')
 

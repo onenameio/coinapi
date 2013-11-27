@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}About - API documentation{% endblock %}
+
+{% block rightnav %}
+{{ macros.rightnav() }}
+{% endblock %}
+
+{% block main %}
+<article class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            {{ macros.sidebar() }}
+        </div><!--/.span3 -->
+
+        <div class="span9">
+            <div class="doc-content-box">
+               <h1 class="heading">About</h1>
+                <p>CoinVibes is a project of the team at <a href="http://halfmoonlabs.com">Halfmoon Labs</a>.</p>
+
+                <p>Want to reach out?</p>
+
+                <p>Just <a href="mailto:hello@halfmoon.io">shoot us an email</a>.</p>
+                
+                <div class="shadow-right"> </div><!-- shadow doc-content-box -->
+            </div><!--/.doc-content-box -->
+        </div><!--/.span9 -->
+    </div><!--/.row-fluid -->
+</article><!-- /container -->
+{% endblock %}

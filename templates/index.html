@@ -1,27 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>The Coin API</title>
-</head>
-<body>
-	<div>
-		<h1>The Coin API</h1>
-	</div>
-	<h3>BTC/USD Across Exchanges</h3>
-	{% for exchange in exchanges %}
-		{% if ('btc', 'usd') in exchange.TICKER_ENDPOINTS %}
-		<div>
-			<a href="/tickers/{{ exchange.slug }}/btc_usd">{{ exchange.name }}</a>
-		</div>
-		{% endif %}
-	{% endfor %}
-	{% for exchange in exchanges %}
-	<h3>{{ exchange.name }}</h3>
-		{% for endpoint_key in exchange.TICKER_ENDPOINTS %}
-		<div>
-			<a href="/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}">{{endpoint_key[0]}}/{{endpoint_key[1]}}</a>
-		</div>
-		{% endfor %}
-	{% endfor %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}API documentation{% endblock %}
+
+{% block rightnav %}
+{{ macros.rightnav() }}
+{% endblock %}
+
+{% block main %}
+<article class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            {{ macros.sidebar() }}
+        </div><!--/.span3 -->
+
+        <div class="span9">
+            <div class="doc-content-box">
+               <h1 class="heading">CoinVibes: The Unified Exchange API</h1>
+                <p>Welcome to the CoinVibes API.</p>
+
+                <p>Want to get started?</p>
+
+                <p>Here, try out your first API call:
+
+                <a href="/api/tickers/bitstamp/btc_usd">/tickers/bitstamp/btc_usd</a>
+
+                </p>
+
+                <p>Next, check out the various exchanges and currencies on the right panel.
+                </p>
+                
+                <div class="shadow-right"> </div><!-- shadow doc-content-box -->
+            </div><!--/.doc-content-box -->
+        </div><!--/.span9 -->
+    </div><!--/.row-fluid -->
+</article><!-- /container -->
+{% endblock %}
+
