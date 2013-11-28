@@ -1,12 +1,11 @@
 import json
 import requests
 import traceback
-from flask import Flask, render_template, Response, request, jsonify, abort
-from exchange_apis import MtGoxAPI, BTCeAPI, BitstampAPI, KrakenAPI, \
+from flask import render_template, Response, request, jsonify, abort
+from api.exchange_apis import MtGoxAPI, BTCeAPI, BitstampAPI, KrakenAPI, \
 	BTCChinaAPI, BitfinexAPI
 
-app = Flask(__name__)
-app.config.from_object('settings')
+from api import app
 
 EXCHANGE_APIS = [
 	BitstampAPI(), MtGoxAPI(), BTCeAPI(), KrakenAPI(), BTCChinaAPI(),
@@ -25,10 +24,15 @@ def exchanges():
 def currencies():
 	currency_pairs = [
 		{ 'name': 'Bitcoin / US Dollars', 'symbols': ('btc','usd') },
+		{ 'name': 'Bitcoin / Euros', 'symbols': ('btc','eur') },
 		{ 'name': 'Bitcoin / Chinese Yuan', 'symbols': ('btc','cny') },
+		{ 'name': 'Bitcoin / Japanese Yen', 'symbols': ('btc','jpy') },
+		{ 'name': 'Bitcoin / Canadian Dollars', 'symbols': ('btc','cad') },
 		{ 'name': 'Litecoin / US Dollars', 'symbols': ('ltc','usd') },
+		{ 'name': 'Litecoin / Euros', 'symbols': ('ltc','eur') },
 		{ 'name': 'Litecoin / Bitcoin', 'symbols': ('ltc','btc') },
 		{ 'name': 'Namecoin / US Dollars', 'symbols': ('nmc','usd') },
+		{ 'name': 'Namecoin / Euros', 'symbols': ('nmc','eur') },
 		{ 'name': 'Namecoin / Bitcoin', 'symbols': ('nmc','btc') },
 		{ 'name': 'Peercoin / Bitcoin', 'symbols': ('ppc','btc') },
 		{ 'name': 'Primecoin / Bitcoin', 'symbols': ('xpm','btc') },

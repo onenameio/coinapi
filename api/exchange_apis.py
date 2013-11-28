@@ -1,15 +1,22 @@
 import json
 import requests
+import traceback
 from flask import abort
+
+def remove_non_ascii(s):
+	return "".join(filter(lambda x: ord(x)<128, s))
 
 class ExchangeAPI(object):
 	def __init__(self):
 		raise NotImplementedError()
 
 	def float_price(self, price):
+		price_no_ascii = remove_non_ascii(price)
+		price_numberified = str(price_no_ascii).strip('$').replace(',', '')
 		try:
-			return float(str(price).strip('$'))
+			return float(price_numberified)
 		except ValueError:
+			traceback.print_exc()
 			return price
 
 	def ticker_data(self, target_currency, native_currency):
@@ -22,9 +29,13 @@ class ExchangeAPI(object):
 		try:
 			data = json.loads(r.text)
 		except ValueError:
+			traceback.print_exc()
 			data = None
 		
 		return data
+
+	def ticker(self, target_currency, native_currency):
+		raise NotImplementedError()
 
 class MtGoxAPI(ExchangeAPI):
 	def __init__(self):
@@ -32,7 +43,11 @@ class MtGoxAPI(ExchangeAPI):
 		self.slug = 'mtgox'
 		self.BASE_URL = 'http://data.mtgox.com/api/2'
 		self.TICKER_ENDPOINTS = {
-			('btc', 'usd'): '/BTCUSD/money/ticker'
+			('btc', 'usd'): '/BTCUSD/money/ticker',
+			('btc', 'jpy'): '/BTCJPY/money/ticker',
+			('btc', 'eur'): '/BTCEUR/money/ticker',
+			('btc', 'cny'): '/BTCCNY/money/ticker',
+			('btc', 'cad'): '/BTCCAD/money/ticker',
 		}
 
 	def ticker(self, target_currency, native_currency):
@@ -60,7 +75,9 @@ class BTCeAPI(ExchangeAPI):
 		self.BASE_URL = 'https://btc-e.com/api/2'
 		self.TICKER_ENDPOINTS = {
 			('btc', 'usd'): '/btc_usd/ticker',
+			('btc', 'eur'): '/btc_eur/ticker',
 			('ltc', 'usd'): '/ltc_usd/ticker',
+			('ltc', 'eur'): '/ltc_eur/ticker',
 			('ltc', 'btc'): '/ltc_btc/ticker',
 			('nmc', 'btc'): '/nmc_btc/ticker',
 			('ppc', 'btc'): '/ppc_btc/ticker',
@@ -117,8 +134,11 @@ class KrakenAPI(ExchangeAPI):
 		self.BASE_URL = 'https://api.kraken.com/0/public'
 		self.TICKER_ENDPOINTS = {
 			('btc', 'usd'): '/Ticker?pair=XXBTZUSD',
+			('btc', 'eur'): '/Ticker?pair=XXBTZEUR',
 			('nmc', 'usd'): '/Ticker?pair=XNMCZUSD',
+			('nmc', 'eur'): '/Ticker?pair=XNMCZEUR',
 			('ltc', 'usd'): '/Ticker?pair=XLTCZUSD',
+			('ltc', 'eur'): '/Ticker?pair=XLTCZEUR',
 			('btc', 'nmc'): '/Ticker?pair=XXBTXNMC',
 		}
 
