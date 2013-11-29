@@ -15,5 +15,33 @@
 {% endmacro %}
 
 {% macro rightnav() %}
+<li><a href="/resources">Resources</a></li>
 <li><a href="/about">About</a></li>
+{% endmacro %}
+
+{% macro resource_group(resource_group) %}
+<!-- table Class Summary -->
+<table class="table table-bordered ">
+    <thead>
+        <tr>
+            <th colspan="2">{{ resource_group['name'] }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in resource_group['items'] %}
+        {% if item.name and item.url %}
+        <tr id="class-summary">
+            <td>
+                <a href="{{ item.url }}" class="class-name" target="_blank">{{ item.name }}</a> 
+                {% if item.description %}
+                <p class="class-desc">{{ item.description }}</p>
+                {% endif %}
+                <p>
+                <!--<img src="http://api.snapito.com/web/43db81f566906729fde41eb3a0737711924c495d/320x240?url={{ item.url }}?fast"/>-->
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table><!-- /table Class Summary -->
 {% endmacro %}

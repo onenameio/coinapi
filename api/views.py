@@ -6,6 +6,7 @@ from api.exchange_apis import MtGoxAPI, BTCeAPI, BitstampAPI, KrakenAPI, \
 	BTCChinaAPI, BitfinexAPI
 
 from api import app
+from api.settings import RESOURCES
 
 EXCHANGE_APIS = [
 	BitstampAPI(), MtGoxAPI(), BTCeAPI(), KrakenAPI(), BTCChinaAPI(),
@@ -15,6 +16,10 @@ EXCHANGE_APIS = [
 @app.route('/about')
 def about():
 	return render_template('about.html')
+
+@app.route('/resources')
+def resources():
+	return render_template('resources.html', resources=RESOURCES)
 
 @app.route('/exchanges')
 def exchanges():
@@ -80,10 +85,10 @@ def single_exchange(exchange, target_currency, native_currency):
 	else:
 		return jsonify({'error': 'did not get a proper response'}), 500
 
-@app.errorhandler(Exception)
-def basic_error_handler(e):
-	traceback.print_exc()
-	return jsonify({'error': 'there was a problem with the server'}), 500
+#@app.errorhandler(Exception)
+#def basic_error_handler(e):
+#	traceback.print_exc()
+#	return jsonify({'error': 'there was a problem with the server'}), 500
 
 
 
