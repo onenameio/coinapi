@@ -85,10 +85,10 @@ def single_exchange(exchange, target_currency, native_currency):
 	else:
 		return jsonify({'error': 'did not get a proper response'}), 500
 
-#@app.errorhandler(Exception)
-#def basic_error_handler(e):
-#	traceback.print_exc()
-#	return jsonify({'error': 'there was a problem with the server'}), 500
+@app.errorhandler(Exception)
+def basic_error_handler(e):
+	traceback.print_exc()
+	return jsonify({'error': 'there was a problem with the server'}), 500
 
 
 
