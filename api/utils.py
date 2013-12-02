@@ -1,5 +1,7 @@
 from api import app
 
+def remove_non_ascii(s):
+    return "".join(filter(lambda x: ord(x)<128, s))
 
 class APIError(Exception):
     status_code = 500

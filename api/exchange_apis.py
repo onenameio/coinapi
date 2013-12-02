@@ -2,10 +2,30 @@ import json
 import requests
 import traceback
 from flask import abort
-from api.utils import APIError
+from api.utils import APIError, remove_non_ascii
 
-def remove_non_ascii(s):
-	return "".join(filter(lambda x: ord(x)<128, s))
+def get_exchange_api(exchange_slug, exchange_apis):
+	for exchange_api in exchange_apis:
+		if exchange_slug == exchange_api.slug:
+			return exchange_api
+	return None
+
+def get_exchange_api_tickers(exchange_api):
+	exchange_data = {
+		'name': exchange_api.name,
+		'slug': exchange_api.slug,
+		'url': '/api/tickers/' + exchange_api.slug,
+		'tickers': []
+	}
+	for ticker_key in exchange_api.tickers:
+		ticker = exchange_api.tickers[ticker_key]
+		ticker_data = {
+			'quote_currency': ticker_key[0],
+			'base_currency': ticker_key[1],
+			'url': '/api/tickers/' + exchange_api.slug + '/' + ticker_key[0] + '_' + ticker_key[1]
+		}
+		exchange_data['tickers'].append(ticker_data)
+	return exchange_data
 
 class ExchangeAPI(object):
 	def __init__(self):
@@ -20,11 +40,12 @@ class ExchangeAPI(object):
 			traceback.print_exc()
 			return price
 
-	def ticker_data(self, target_currency, native_currency):
-		ticker_endpoint = self.TICKER_ENDPOINTS.get((target_currency, native_currency))
-		if ticker_endpoint:
+	def ticker_data(self, quote_currency, base_currency):
+		ticker = self.tickers.get((quote_currency, base_currency))
+		if ticker:
 			try:
-				r = requests.get(self.BASE_URL + ticker_endpoint, timeout=4, verify=False)
+				r = requests.get(self.base_url + ticker.get('url'),
+								 timeout=4, verify=False)
 			except requests.exceptions.Timeout:
 				raise APIError('Timeout')
 		else:
@@ -38,27 +59,27 @@ class ExchangeAPI(object):
 		
 		return data
 
-	def ticker(self, target_currency, native_currency):
+	def ticker(self, quote_currency, base_currency):
 		raise NotImplementedError()
 
 class MtGoxAPI(ExchangeAPI):
 	def __init__(self):
 		self.name = 'Mt. Gox'
 		self.slug = 'mtgox'
-		self.BASE_URL = 'http://data.mtgox.com/api/2'
-		self.TICKER_ENDPOINTS = {
-			('btc', 'usd'): '/BTCUSD/money/ticker',
-			('btc', 'jpy'): '/BTCJPY/money/ticker',
-			('btc', 'eur'): '/BTCEUR/money/ticker',
-			('btc', 'cny'): '/BTCCNY/money/ticker',
-			('btc', 'cad'): '/BTCCAD/money/ticker',
+		self.base_url = 'http://data.mtgox.com/api/2'
+		self.tickers = {
+			('btc', 'usd'): { 'url': '/BTCUSD/money/ticker' },
+			('btc', 'jpy'): { 'url': '/BTCJPY/money/ticker' },
+			('btc', 'eur'): { 'url': '/BTCEUR/money/ticker' },
+			('btc', 'cny'): { 'url': '/BTCCNY/money/ticker' },
+			('btc', 'cad'): { 'url': '/BTCCAD/money/ticker' },
 		}
 
-	def ticker(self, target_currency, native_currency):
-		ticker_data = self.ticker_data(target_currency, native_currency)['data']
+	def ticker(self, quote_currency, base_currency):
+		ticker_data = self.ticker_data(quote_currency, base_currency)['data']
 
 		ticker = {
-			'price_units': native_currency,
+			'price_units': base_currency,
 			'vol': float(ticker_data['vol']['value_int']),
 			'bid': self.float_price(ticker_data['buy']['display']),
 			'ask': self.float_price(ticker_data['sell']['display']),
@@ -76,25 +97,25 @@ class BTCeAPI(ExchangeAPI):
 	def __init__(self):
 		self.name = 'BTC-e'
 		self.slug = 'btce'
-		self.BASE_URL = 'https://btc-e.com/api/2'
-		self.TICKER_ENDPOINTS = {
-			('btc', 'usd'): '/btc_usd/ticker',
-			('btc', 'eur'): '/btc_eur/ticker',
-			('ltc', 'usd'): '/ltc_usd/ticker',
-			('ltc', 'eur'): '/ltc_eur/ticker',
-			('ltc', 'btc'): '/ltc_btc/ticker',
-			('nmc', 'btc'): '/nmc_btc/ticker',
-			('ppc', 'btc'): '/ppc_btc/ticker',
-			('xpm', 'btc'): '/xpm_btc/ticker',
-			('nvc', 'btc'): '/nvc_btc/ticker',
-			('trc', 'btc'): '/trc_btc/ticker',
+		self.base_url = 'https://btc-e.com/api/2'
+		self.tickers = {
+			('btc', 'usd'): { 'url': '/btc_usd/ticker' },
+			('btc', 'eur'): { 'url': '/btc_eur/ticker' },
+			('ltc', 'usd'): { 'url': '/ltc_usd/ticker' },
+			('ltc', 'eur'): { 'url': '/ltc_eur/ticker' },
+			('ltc', 'btc'): { 'url': '/ltc_btc/ticker' },
+			('nmc', 'btc'): { 'url': '/nmc_btc/ticker' },
+			('ppc', 'btc'): { 'url': '/ppc_btc/ticker' },
+			('xpm', 'btc'): { 'url': '/xpm_btc/ticker' },
+			('nvc', 'btc'): { 'url': '/nvc_btc/ticker' },
+			('trc', 'btc'): { 'url': '/trc_btc/ticker' },
 		}
 
-	def ticker(self, target_currency, native_currency):
-		ticker_data = self.ticker_data(target_currency, native_currency)['ticker']
+	def ticker(self, quote_currency, base_currency):
+		ticker_data = self.ticker_data(quote_currency, base_currency)['ticker']
 
 		ticker = {
-			'price_units': native_currency,
+			'price_units': base_currency,
 			'vol': float(ticker_data['vol']),
 			'bid': ticker_data['buy'],
 			'ask': ticker_data['sell'],
@@ -111,16 +132,16 @@ class BitstampAPI(ExchangeAPI):
 	def __init__(self):
 		self.name = 'Bitstamp'
 		self.slug = 'bitstamp'
-		self.BASE_URL = 'https://www.bitstamp.net/api'
-		self.TICKER_ENDPOINTS = {
-			('btc', 'usd'): '/ticker/'
+		self.base_url = 'https://www.bitstamp.net/api'
+		self.tickers = {
+			('btc', 'usd'): { 'url': '/ticker/' }
 		}
 
-	def ticker(self, target_currency, native_currency):
-		ticker_data = self.ticker_data(target_currency, native_currency)
+	def ticker(self, quote_currency, base_currency):
+		ticker_data = self.ticker_data(quote_currency, base_currency)
 
 		ticker = {
-			'price_units': native_currency,
+			'price_units': base_currency,
 			'volume': float(ticker_data['volume']),
 			'bid': self.float_price(ticker_data['bid']),
 			'ask': self.float_price(ticker_data['ask']),
@@ -135,26 +156,26 @@ class KrakenAPI(ExchangeAPI):
 	def __init__(self):
 		self.name = 'Kraken'
 		self.slug = 'kraken'
-		self.BASE_URL = 'https://api.kraken.com/0/public'
-		self.TICKER_ENDPOINTS = {
-			('btc', 'usd'): '/Ticker?pair=XXBTZUSD',
-			('btc', 'eur'): '/Ticker?pair=XXBTZEUR',
-			('nmc', 'usd'): '/Ticker?pair=XNMCZUSD',
-			('nmc', 'eur'): '/Ticker?pair=XNMCZEUR',
-			('ltc', 'usd'): '/Ticker?pair=XLTCZUSD',
-			('ltc', 'eur'): '/Ticker?pair=XLTCZEUR',
-			('btc', 'nmc'): '/Ticker?pair=XXBTXNMC',
+		self.base_url = 'https://api.kraken.com/0/public'
+		self.tickers = {
+			('btc', 'usd'): { 'url': '/Ticker?pair=XXBTZUSD' },
+			('btc', 'eur'): { 'url': '/Ticker?pair=XXBTZEUR' },
+			('nmc', 'usd'): { 'url': '/Ticker?pair=XNMCZUSD' },
+			('nmc', 'eur'): { 'url': '/Ticker?pair=XNMCZEUR' },
+			('ltc', 'usd'): { 'url': '/Ticker?pair=XLTCZUSD' },
+			('ltc', 'eur'): { 'url': '/Ticker?pair=XLTCZEUR' },
+			('btc', 'nmc'): { 'url': '/Ticker?pair=XXBTXNMC' },
 		}
 
-	def ticker(self, target_currency, native_currency):
-		ticker_data = self.ticker_data(target_currency, native_currency)
+	def ticker(self, quote_currency, base_currency):
+		ticker_data = self.ticker_data(quote_currency, base_currency)
 
-		endpoint_name = self.TICKER_ENDPOINTS.get((target_currency, native_currency))
-		pair_name = endpoint_name.strip('/Ticker?pair=')
+		ticker = self.tickers.get((quote_currency, base_currency))
+		pair_name = ticker.get('url').strip('/Ticker?pair=')
 		ticker_data = ticker_data['result'][pair_name]
 
 		ticker = {
-			'price_units': native_currency,
+			'price_units': base_currency,
 			'volume': self.float_price(ticker_data['v'][0]),
 			'bid': self.float_price(ticker_data['b'][0]),
 			'ask': self.float_price(ticker_data['a'][0]),
@@ -169,16 +190,16 @@ class BTCChinaAPI(ExchangeAPI):
 	def __init__(self):
 		self.name = 'BTC China'
 		self.slug = 'btcchina'
-		self.BASE_URL = 'https://vip.btcchina.com'
-		self.TICKER_ENDPOINTS = {
-			('btc', 'cny'): '/bc/ticker',
+		self.base_url = 'https://vip.btcchina.com'
+		self.tickers = {
+			('btc', 'cny'): { 'url': '/bc/ticker' },
 		}
 
-	def ticker(self, target_currency, native_currency):
-		ticker_data = self.ticker_data(target_currency, native_currency)['ticker']
+	def ticker(self, quote_currency, base_currency):
+		ticker_data = self.ticker_data(quote_currency, base_currency)['ticker']
 
 		ticker = {
-			'price_units': native_currency,
+			'price_units': base_currency,
 			'vol': float(ticker_data['vol']),
 			'bid': self.float_price(ticker_data['buy']),
 			'ask': self.float_price(ticker_data['sell']),
@@ -193,18 +214,18 @@ class BitfinexAPI(ExchangeAPI):
 	def __init__(self):
 		self.name = 'Bitfinex'
 		self.slug = 'bitfinex'
-		self.BASE_URL = 'https://api.bitfinex.com/v1'
-		self.TICKER_ENDPOINTS = {
-			('btc', 'usd'): '/ticker/btcusd',
-			('ltc', 'usd'): '/ticker/ltcusd',
-			('ltc', 'btc'): '/ticker/ltcbtc',
+		self.base_url = 'https://api.bitfinex.com/v1'
+		self.tickers = {
+			('btc', 'usd'): { 'url': '/ticker/btcusd' },
+			('ltc', 'usd'): { 'url': '/ticker/ltcusd' },
+			('ltc', 'btc'): { 'url': '/ticker/ltcbtc' },
 		}
 
-	def ticker(self, target_currency, native_currency):
-		ticker_data = self.ticker_data(target_currency, native_currency)
+	def ticker(self, quote_currency, base_currency):
+		ticker_data = self.ticker_data(quote_currency, base_currency)
 
 		ticker = {
-			'price_units': native_currency,
+			'price_units': base_currency,
 			'bid': self.float_price(ticker_data['bid']),
 			'ask': self.float_price(ticker_data['ask']),
 			'last': self.float_price(ticker_data['last_price']),

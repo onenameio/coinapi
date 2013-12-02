@@ -1,4 +1,22 @@
-DEBUG = False
+DEBUG = True
+
+CURRENCY_PAIRS = [
+	{ 'name': 'Bitcoin / US Dollars', 'symbols': ('btc','usd') },
+	{ 'name': 'Bitcoin / Euros', 'symbols': ('btc','eur') },
+	{ 'name': 'Bitcoin / Chinese Yuan', 'symbols': ('btc','cny') },
+	{ 'name': 'Bitcoin / Japanese Yen', 'symbols': ('btc','jpy') },
+	{ 'name': 'Bitcoin / Canadian Dollars', 'symbols': ('btc','cad') },
+	{ 'name': 'Litecoin / US Dollars', 'symbols': ('ltc','usd') },
+	{ 'name': 'Litecoin / Euros', 'symbols': ('ltc','eur') },
+	{ 'name': 'Litecoin / Bitcoin', 'symbols': ('ltc','btc') },
+	{ 'name': 'Namecoin / US Dollars', 'symbols': ('nmc','usd') },
+	{ 'name': 'Namecoin / Euros', 'symbols': ('nmc','eur') },
+	{ 'name': 'Namecoin / Bitcoin', 'symbols': ('nmc','btc') },
+	{ 'name': 'Peercoin / Bitcoin', 'symbols': ('ppc','btc') },
+	{ 'name': 'Primecoin / Bitcoin', 'symbols': ('xpm','btc') },
+	{ 'name': 'Novacoin / Bitcoin', 'symbols': ('nvc','btc') },
+	{ 'name': 'Terracoin / Bitcoin', 'symbols': ('trc','btc') },
+]
 
 RESOURCES = { "groups": [
 	{

@@ -5,9 +5,9 @@ from flask import render_template, Response, request, jsonify, abort
 
 from api import app
 from api.exchange_apis import MtGoxAPI, BTCeAPI, BitstampAPI, KrakenAPI, \
-	BTCChinaAPI, BitfinexAPI
+	BTCChinaAPI, BitfinexAPI, get_exchange_api, get_exchange_api_tickers
 from api.utils import APIError
-from api.settings import RESOURCES
+from api.settings import RESOURCES, CURRENCY_PAIRS
 
 EXCHANGE_APIS = [
 	BitstampAPI(), MtGoxAPI(), BTCeAPI(), KrakenAPI(), BTCChinaAPI(),
@@ -28,59 +28,50 @@ def exchanges():
 
 @app.route('/currencies')
 def currencies():
-	currency_pairs = [
-		{ 'name': 'Bitcoin / US Dollars', 'symbols': ('btc','usd') },
-		{ 'name': 'Bitcoin / Euros', 'symbols': ('btc','eur') },
-		{ 'name': 'Bitcoin / Chinese Yuan', 'symbols': ('btc','cny') },
-		{ 'name': 'Bitcoin / Japanese Yen', 'symbols': ('btc','jpy') },
-		{ 'name': 'Bitcoin / Canadian Dollars', 'symbols': ('btc','cad') },
-		{ 'name': 'Litecoin / US Dollars', 'symbols': ('ltc','usd') },
-		{ 'name': 'Litecoin / Euros', 'symbols': ('ltc','eur') },
-		{ 'name': 'Litecoin / Bitcoin', 'symbols': ('ltc','btc') },
-		{ 'name': 'Namecoin / US Dollars', 'symbols': ('nmc','usd') },
-		{ 'name': 'Namecoin / Euros', 'symbols': ('nmc','eur') },
-		{ 'name': 'Namecoin / Bitcoin', 'symbols': ('nmc','btc') },
-		{ 'name': 'Peercoin / Bitcoin', 'symbols': ('ppc','btc') },
-		{ 'name': 'Primecoin / Bitcoin', 'symbols': ('xpm','btc') },
-		#{ 'name': 'Novacoin / Bitcoin', 'symbols': ('nvc','btc') },
-		#{ 'name': 'Terracoin / Bitcoin', 'symbols': ('trc','btc') },
-	]
 	return render_template('currencies.html', exchanges=EXCHANGE_APIS,
-						   currency_pairs=currency_pairs)
+						   currency_pairs=CURRENCY_PAIRS)
 
 @app.route('/')
 def index():
 	return render_template('index.html', exchanges=EXCHANGE_APIS)
 
-"""@app.route('/tickers/<target_currency>_<native_currency>')
-def all_exchanges(target_currency, native_currency):
-	data = {}
-	
-	for exchange in EXCHANGE_APIS:
-		exchange_data = exchange.ticker(target_currency, native_currency)
-		data[exchange.slug] = exchange_data
+@app.route('/api')
+def api_index():
+	data = {
+		'resources': [
+			{'name': 'Tickers', 'url': '/api/tickers' }
+		 ]
+	}
 
-	return jsonify(data), 200"""
+	return jsonify(data), 200
 
-@app.route('/api/tickers/<exchange>/<target_currency>_<native_currency>')
-def single_exchange(exchange, target_currency, native_currency):
-	if exchange == 'mtgox':
-		exchange_api = MtGoxAPI()
-	elif exchange == 'btce':
-		exchange_api = BTCeAPI()
-	elif exchange == 'bitstamp':
-		exchange_api = BitstampAPI()
-	elif exchange == 'kraken':
-		exchange_api = KrakenAPI()
-	elif exchange == 'btcchina':
-		exchange_api = BTCChinaAPI()
-	elif exchange == 'bitfinex':
-		exchange_api = BitfinexAPI()
-	else:
+@app.route('/api/tickers')
+def all_tickers():
+	data = { 'exchanges': [] }
+
+	for exchange_api in EXCHANGE_APIS:
+		data['exchanges'].append(get_exchange_api_tickers(exchange_api))
+
+	return jsonify(data), 200
+
+@app.route('/api/tickers/<exchange_slug>')
+def all_currency_pairs_on_exchange(exchange_slug):
+	exchange_api = get_exchange_api(exchange_slug, EXCHANGE_APIS)
+	if not exchange_api:
+		abort(404)
+
+	data = get_exchange_api_tickers(exchange_api)
+
+	return jsonify(data), 200
+
+@app.route('/api/tickers/<exchange_slug>/<quote_currency>_<base_currency>')
+def currency_pair_on_exchange(exchange_slug, quote_currency, base_currency):
+	exchange_api = get_exchange_api(exchange_slug, EXCHANGE_APIS)
+	if not exchange_api:
 		abort(404)
 
 	try:
-		data = exchange_api.ticker(target_currency, native_currency)
+		data = exchange_api.ticker(quote_currency, base_currency)
 	except:
 		traceback.print_exc()
 		return jsonify({'error': 'There seems to be a problem with the exchange API.'}), 500
@@ -93,25 +84,8 @@ def single_exchange(exchange, target_currency, native_currency):
 # error handling
 @app.errorhandler(APIError)
 def handle_api_error(error):
-    response = jsonify(error.to_dict())
-    response.status_code = error.status_code
-    return response
-
-#@app.errorhandler(Exception)
-#def basic_error_handler(e):
-#	traceback.print_exc()
-#	return jsonify({'error': 'there was a problem with the server'}), 500
-
-# just for testing
-@app.route('/help')
-def help():
-	return render_template('help.html')
-
-@app.route('/tree')
-def tree():
-	return render_template('tree.html')
-
-@app.route('/content')
-def content():
-	return render_template('content.html')
+	traceback.print_exc()
+	response = jsonify(error.to_dict())
+	response.status_code = error.status_code
+	return response
 

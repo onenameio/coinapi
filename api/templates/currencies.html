@@ -33,7 +33,7 @@
                     </thead>
                     <tbody>
                         {% for exchange in exchanges %}
-                        {% if currency_pair.symbols in exchange.TICKER_ENDPOINTS %}
+                        {% if currency_pair.symbols in exchange.tickers %}
                         <tr id="class-summary">
                             <td style="width: 150px;">
                                 <p class="class-scope">{{ exchange.name }}</p>

@@ -20,8 +20,15 @@
                     <h2>Exchanges</h2>
                 </div>
                 
-                <p>A listing of all the exchanges supported by the CoinVibes API.
-                </p><!-- /Class Overview -->
+                <p>
+                    Below is the human-readable listing of all the exchanges supported by the CoinVibes API, as well as their respective tickers.
+                </p>
+
+                <p>
+                    Here's a <a href="/api/tickers">machine-readable listing</a>.
+                </p>
+                <!-- /Class Overview -->
+                <hr>
 
                 {% for exchange in exchanges %}
                 <!-- table Class Summary -->
@@ -32,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for endpoint_key in exchange.TICKER_ENDPOINTS %}
+                        {% for endpoint_key in exchange.tickers %}
                         <tr id="class-summary">
                             <td style="width: 150px;">
                                 <p class="class-scope">{{endpoint_key[0]}}/{{endpoint_key[1]}}</p>
