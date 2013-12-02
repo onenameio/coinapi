@@ -116,14 +116,22 @@ class BTCeAPI(ExchangeAPI):
 		self.tickers = {
 			('btc', 'usd'): { 'url': '/btc_usd/ticker' },
 			('btc', 'eur'): { 'url': '/btc_eur/ticker' },
+			('btc', 'rur'): { 'url': '/btc_rur/ticker' },
 			('ltc', 'usd'): { 'url': '/ltc_usd/ticker' },
 			('ltc', 'eur'): { 'url': '/ltc_eur/ticker' },
 			('ltc', 'btc'): { 'url': '/ltc_btc/ticker' },
+			('ltc', 'rur'): { 'url': '/ltc_rur/ticker' },
 			('nmc', 'btc'): { 'url': '/nmc_btc/ticker' },
+			('nmc', 'usd'): { 'url': '/nmc_usd/ticker' },
 			('ppc', 'btc'): { 'url': '/ppc_btc/ticker' },
+			('ppc', 'usd'): { 'url': '/ppc_usd/ticker' },
 			('xpm', 'btc'): { 'url': '/xpm_btc/ticker' },
 			('nvc', 'btc'): { 'url': '/nvc_btc/ticker' },
+			('nvc', 'usd'): { 'url': '/nvc_usd/ticker' },
 			('trc', 'btc'): { 'url': '/trc_btc/ticker' },
+			('ftc', 'btc'): { 'url': '/ftc_btc/ticker' },
+			('usd', 'rur'): { 'url': '/usd_rur/ticker' },
+			('eur', 'usd'): { 'url': '/eur_usd/ticker' },
 		}
 
 	def ticker(self, quote_currency, base_currency):
