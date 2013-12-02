@@ -2,7 +2,7 @@ import json
 import requests
 import traceback
 from flask import abort
-from api.utils import APIError, remove_non_ascii, remove_non_numeric
+from coinvibes.utils import APIError, remove_non_ascii, remove_non_numeric
 
 def get_exchange_api(exchange_slug, exchange_apis):
 	for exchange_api in exchange_apis:
@@ -306,4 +306,9 @@ class CoinbaseAPI(ExchangeAPI):
 		}
 
 		return ticker
+
+EXCHANGE_APIS = [
+	BitstampAPI(), MtGoxAPI(), BTCeAPI(), KrakenAPI(), BTCChinaAPI(),
+	BitfinexAPI(), CoinbaseAPI()
+]
 

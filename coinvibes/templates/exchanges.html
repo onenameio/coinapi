@@ -45,7 +45,7 @@
                                 <p class="class-scope">{{endpoint_key[0]}}/{{endpoint_key[1]}}</p>
                             </td>
                             <td class="">
-                                <a href="/api/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}">/api/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}</a>
+                                <a href="{{ api_prefix }}/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}">{{ api_prefix }}/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}</a>
                                 <!--<p class="class-desc">
                                     {{endpoint_key[0]}} -> {{endpoint_key[1]}}
                                 </p>-->

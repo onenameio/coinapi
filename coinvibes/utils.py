@@ -1,6 +1,6 @@
 import re
 
-from api import app
+from coinvibes import app
 
 def remove_non_ascii(s):
     return "".join(filter(lambda x: ord(x)<128, s))

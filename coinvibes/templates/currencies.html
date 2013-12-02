@@ -39,7 +39,7 @@
                                 <p class="class-scope">{{ exchange.name }}</p>
                             </td>
                             <td class="">
-                                <a href="/api/tickers/{{ exchange.slug }}/{{ currency_pair.symbols[0] }}_{{ currency_pair.symbols[1] }}">/api/tickers/{{ exchange.slug }}/{{ currency_pair.symbols[0] }}_{{ currency_pair.symbols[1] }}</a>
+                                <a href="{{ api_prefix }}/tickers/{{ exchange.slug }}/{{ currency_pair.symbols[0] }}_{{ currency_pair.symbols[1] }}">{{ api_prefix }}/tickers/{{ exchange.slug }}/{{ currency_pair.symbols[0] }}_{{ currency_pair.symbols[1] }}</a>
                             </td>
                         </tr>
                         {% endif %}

@@ -1,5 +1,5 @@
 import os
-from api import app
+from coinvibes import app
 
 def runserver():
 	port = int(os.environ.get('PORT', 5000))
