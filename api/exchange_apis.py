@@ -24,7 +24,7 @@ class ExchangeAPI(object):
 		ticker_endpoint = self.TICKER_ENDPOINTS.get((target_currency, native_currency))
 		if ticker_endpoint:
 			try:
-				r = requests.get(self.BASE_URL + ticker_endpoint, timeout=4)
+				r = requests.get(self.BASE_URL + ticker_endpoint, timeout=4, verify=False)
 			except requests.exceptions.Timeout:
 				raise APIError('Timeout')
 		else:
