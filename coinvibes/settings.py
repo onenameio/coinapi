@@ -1,4 +1,4 @@
-DEBUG = False
+DEBUG = True
 
 CURRENCY_PAIRS = [
 	{ 'name': 'Bitcoin / US Dollars', 'symbols': ('btc','usd') },

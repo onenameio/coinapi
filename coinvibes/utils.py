@@ -23,3 +23,15 @@ class APIError(Exception):
         rv['message'] = self.message
         return rv
 
+from functools import wraps
+from flask import request
+import analytics
+
+def identify_user(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        user_id = request.remote_addr
+        analytics.identify(user_id, {})
+        return f(*args, **kwargs)
+    return decorated_function
+
