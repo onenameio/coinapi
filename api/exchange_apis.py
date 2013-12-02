@@ -263,3 +263,47 @@ class BitfinexAPI(ExchangeAPI):
 
 		return ticker
 
+class CoinbaseAPI(ExchangeAPI):
+	def __init__(self):
+		self.name = 'Coinbase'
+		self.slug = 'coinbase'
+		self.base_url = 'https://coinbase.com/api/v1'
+		self.tickers = {
+			('btc', 'usd'): { 'url': '/prices/buy', 'url2': '/prices/sell' },
+		}
+
+	def ticker_data(self, quote_currency, base_currency):
+		ticker = self.tickers.get((quote_currency, base_currency))
+		if ticker:
+			try:
+				r1 = requests.get(self.base_url + ticker.get('url'),
+								 timeout=4, verify=False)
+				r2 = requests.get(self.base_url + ticker.get('url2'),
+								 timeout=4, verify=False)
+			except requests.exceptions.Timeout:
+				raise APIError('Timeout')
+		else:
+			abort(404)
+
+		try:
+			data1 = json.loads(r1.text)
+			data2 = json.loads(r2.text)
+		except ValueError:
+			traceback.print_exc()
+			data = None
+
+		data = { "buy": data1, "sell": data2 }
+
+		return data
+
+	def ticker(self, quote_currency, base_currency):
+		ticker_data = self.ticker_data(quote_currency, base_currency)
+
+		ticker = {
+			'price_units': base_currency,
+			'bid': self.float_price(ticker_data['buy']['amount']),
+			'ask': self.float_price(ticker_data['sell']['amount']),
+		}
+
+		return ticker
+

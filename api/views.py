@@ -6,13 +6,14 @@ from flask import render_template, Response, request, jsonify, abort
 
 from api import app
 from api.exchange_apis import MtGoxAPI, BTCeAPI, BitstampAPI, KrakenAPI, \
-	BTCChinaAPI, BitfinexAPI, get_exchange_api, get_exchange_api_tickers
+	BTCChinaAPI, BitfinexAPI, CoinbaseAPI, get_exchange_api, \
+	get_exchange_api_tickers
 from api.utils import APIError
 from api.settings import RESOURCES, CURRENCY_PAIRS
 
 EXCHANGE_APIS = [
 	BitstampAPI(), MtGoxAPI(), BTCeAPI(), KrakenAPI(), BTCChinaAPI(),
-	BitfinexAPI()
+	BitfinexAPI(), CoinbaseAPI()
 ]
 
 @app.route('/about')
