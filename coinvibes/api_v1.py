@@ -53,7 +53,7 @@ def currency_pair_on_exchange(exchange_slug, quote_currency, base_currency):
 		return jsonify({'error': 'There seems to be a problem with the exchange API.'}), 500
 
 	if data:
-		data['request_timestamp'] = int(time.time())
+		data['coinvibes_timestamp'] = int(time.time())
 		return jsonify(data), 200
 	else:
 		return jsonify({'error': 'did not get a proper response'}), 500
