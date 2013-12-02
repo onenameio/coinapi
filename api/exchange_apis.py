@@ -65,6 +65,12 @@ class ExchangeAPI(object):
 	def ticker(self, quote_currency, base_currency):
 		raise NotImplementedError()
 
+	def get_description(self):
+		return {
+			'name': self.name,
+			'slug': self.slug
+		}
+
 class MtGoxAPI(ExchangeAPI):
 	def __init__(self):
 		self.name = 'Mt. Gox'
@@ -100,7 +106,7 @@ class MtGoxAPI(ExchangeAPI):
 			'ask': self.float_price(ticker_data['sell']['display']),
 			'high': self.float_price(ticker_data['high']['display']),
 			'low': self.float_price(ticker_data['low']['display']),
-			'timestamp': int(ticker_data['now'])/(1000*1000),
+			'exchange_timestamp': int(ticker_data['now'])/(1000*1000),
 			'last': self.float_price(ticker_data['last']['display']),
 			'average': self.float_price(ticker_data['avg']['display']),
 			'vwap': self.float_price(ticker_data['vwap']['display']),
@@ -144,7 +150,7 @@ class BTCeAPI(ExchangeAPI):
 			'ask': ticker_data['sell'],
 			'high': ticker_data['high'],
 			'low': ticker_data['low'],
-			'timestamp': int(ticker_data['server_time']),
+			'exchange_timestamp': int(ticker_data['server_time']),
 			'last': ticker_data['last'],
 			'average': ticker_data['avg'],
 		}
@@ -170,7 +176,7 @@ class BitstampAPI(ExchangeAPI):
 			'ask': self.float_price(ticker_data['ask']),
 			'high': self.float_price(ticker_data['high']),
 			'low': self.float_price(ticker_data['low']),
-			'timestamp': int(ticker_data['timestamp']),
+			'exchange_timestamp': int(ticker_data['timestamp']),
 		}
 
 		return ticker
@@ -252,7 +258,7 @@ class BitfinexAPI(ExchangeAPI):
 			'bid': self.float_price(ticker_data['bid']),
 			'ask': self.float_price(ticker_data['ask']),
 			'last': self.float_price(ticker_data['last_price']),
-			'timestamp': int(float(ticker_data['timestamp'])),
+			'exchange_timestamp': int(float(ticker_data['timestamp'])),
 		}
 
 		return ticker
