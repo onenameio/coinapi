@@ -2,6 +2,7 @@ import json
 import requests
 import traceback
 from flask import abort
+from api.utils import APIError
 
 def remove_non_ascii(s):
 	return "".join(filter(lambda x: ord(x)<128, s))
@@ -22,10 +23,13 @@ class ExchangeAPI(object):
 	def ticker_data(self, target_currency, native_currency):
 		ticker_endpoint = self.TICKER_ENDPOINTS.get((target_currency, native_currency))
 		if ticker_endpoint:
-			r = requests.get(self.BASE_URL + ticker_endpoint)
+			try:
+				r = requests.get(self.BASE_URL + ticker_endpoint, timeout=4)
+			except requests.exceptions.Timeout:
+				raise APIError('Timeout')
 		else:
 			abort(404)
-		
+
 		try:
 			data = json.loads(r.text)
 		except ValueError:

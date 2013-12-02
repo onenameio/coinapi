@@ -2,10 +2,11 @@ import json
 import requests
 import traceback
 from flask import render_template, Response, request, jsonify, abort
-from api.exchange_apis import MtGoxAPI, BTCeAPI, BitstampAPI, KrakenAPI, \
-	BTCChinaAPI, BitfinexAPI
 
 from api import app
+from api.exchange_apis import MtGoxAPI, BTCeAPI, BitstampAPI, KrakenAPI, \
+	BTCChinaAPI, BitfinexAPI
+from api.utils import APIError
 from api.settings import RESOURCES
 
 EXCHANGE_APIS = [
@@ -85,12 +86,17 @@ def single_exchange(exchange, target_currency, native_currency):
 	else:
 		return jsonify({'error': 'did not get a proper response'}), 500
 
-@app.errorhandler(Exception)
-def basic_error_handler(e):
-	traceback.print_exc()
-	return jsonify({'error': 'there was a problem with the server'}), 500
+# error handling
+@app.errorhandler(APIError)
+def handle_api_error(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
 
-
+#@app.errorhandler(Exception)
+#def basic_error_handler(e):
+#	traceback.print_exc()
+#	return jsonify({'error': 'there was a problem with the server'}), 500
 
 # just for testing
 @app.route('/help')
