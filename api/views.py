@@ -79,7 +79,11 @@ def single_exchange(exchange, target_currency, native_currency):
 	else:
 		abort(404)
 
-	data = exchange_api.ticker(target_currency, native_currency)
+	try:
+		data = exchange_api.ticker(target_currency, native_currency)
+	except:
+		traceback.print_exc()
+		return jsonify({'error': 'There seems to be a problem with the exchange API.'}), 500
 
 	if data:
 		return jsonify(data), 200

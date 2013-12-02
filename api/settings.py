@@ -161,5 +161,45 @@ RESOURCES = { "groups": [
 			},
 		],
 	},
+	{
+		"name": "Merchants",
+		"items": [
+			{
+			"name": "useBitcoins.info",
+			"url": "http://usebitcoins.info/",
+			"description": ""
+			},
+			{
+			"name": "Coinmap.org",
+			"url": "http://coinmap.org/",
+			"description": ""
+			},
+			{
+			"name": "",
+			"url": "",
+			"description": ""
+			},
+		],
+	},
+	{
+		"name": "Exchanges",
+		"items": [
+			{
+			"name": "",
+			"url": "",
+			"description": ""
+			},
+			{
+			"name": "",
+			"url": "",
+			"description": ""
+			},
+			{
+			"name": "",
+			"url": "",
+			"description": ""
+			},
+		],
+	},
 ]
 }
