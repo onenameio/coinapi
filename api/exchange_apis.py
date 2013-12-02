@@ -2,7 +2,7 @@ import json
 import requests
 import traceback
 from flask import abort
-from api.utils import APIError, remove_non_ascii
+from api.utils import APIError, remove_non_ascii, remove_non_numeric
 
 def get_exchange_api(exchange_slug, exchange_apis):
 	for exchange_api in exchange_apis:
@@ -27,13 +27,16 @@ def get_exchange_api_tickers(exchange_api):
 		exchange_data['tickers'].append(ticker_data)
 	return exchange_data
 
+def format_currency_string(s):
+	pass
+
 class ExchangeAPI(object):
 	def __init__(self):
 		raise NotImplementedError()
 
 	def float_price(self, price):
 		price_no_ascii = remove_non_ascii(price)
-		price_numberified = str(price_no_ascii).strip('$').replace(',', '')
+		price_numberified = remove_non_numeric(price_no_ascii)
 		try:
 			return float(price_numberified)
 		except ValueError:
@@ -73,6 +76,18 @@ class MtGoxAPI(ExchangeAPI):
 			('btc', 'eur'): { 'url': '/BTCEUR/money/ticker' },
 			('btc', 'cny'): { 'url': '/BTCCNY/money/ticker' },
 			('btc', 'cad'): { 'url': '/BTCCAD/money/ticker' },
+			('btc', 'aud'): { 'url': '/BTCAUD/money/ticker' },
+			('btc', 'chf'): { 'url': '/BTCCHF/money/ticker' },
+			('btc', 'dkk'): { 'url': '/BTCDKK/money/ticker' },
+			('btc', 'gbp'): { 'url': '/BTCGBP/money/ticker' },
+			('btc', 'hkd'): { 'url': '/BTCHKD/money/ticker' },
+			('btc', 'nok'): { 'url': '/BTCNOK/money/ticker' },
+			('btc', 'nzd'): { 'url': '/BTCNZD/money/ticker' },
+			('btc', 'pln'): { 'url': '/BTCPLN/money/ticker' },
+			('btc', 'rub'): { 'url': '/BTCRUB/money/ticker' },
+			('btc', 'sek'): { 'url': '/BTCSEK/money/ticker' },
+			('btc', 'sgd'): { 'url': '/BTCSGD/money/ticker' },
+			('btc', 'thb'): { 'url': '/BTCTHB/money/ticker' },
 		}
 
 	def ticker(self, quote_currency, base_currency):

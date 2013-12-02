@@ -178,6 +178,11 @@ RESOURCES = { "groups": [
 			"url": "http://bitcoin.clarkmoody.com/",
 			"description": ""
 			},
+			{
+			"name": "Bitcoin Analytics",
+			"url": "http://bitcoin-analytics.com/",
+			"description": ""
+			},
 		],
 	},
 	{
