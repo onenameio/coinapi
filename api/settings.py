@@ -95,6 +95,26 @@ RESOURCES = { "groups": [
 		],
 	},
 	{
+		"name": "Videos",
+		"items": [
+			{
+			"name": "BitcoinFilm.org",
+			"url": "http://bitcoinfilm.org/",
+			"description": ""
+			},
+			{
+			"name": "",
+			"url": "",
+			"description": ""
+			},
+			{
+			"name": "",
+			"url": "",
+			"description": ""
+			},
+		],
+	},
+	{
 		"name": "Charts",
 		"items": [
 			{
@@ -160,26 +180,6 @@ RESOURCES = { "groups": [
 		],
 	},
 	{
-		"name": "Videos",
-		"items": [
-			{
-			"name": "BitcoinFilm.org",
-			"url": "http://bitcoinfilm.org/",
-			"description": ""
-			},
-			{
-			"name": "",
-			"url": "",
-			"description": ""
-			},
-			{
-			"name": "",
-			"url": "",
-			"description": ""
-			},
-		],
-	},
-	{
 		"name": "Merchants",
 		"items": [
 			{
@@ -190,26 +190,6 @@ RESOURCES = { "groups": [
 			{
 			"name": "Coinmap.org",
 			"url": "http://coinmap.org/",
-			"description": ""
-			},
-			{
-			"name": "",
-			"url": "",
-			"description": ""
-			},
-		],
-	},
-	{
-		"name": "Exchanges",
-		"items": [
-			{
-			"name": "",
-			"url": "",
-			"description": ""
-			},
-			{
-			"name": "",
-			"url": "",
 			"description": ""
 			},
 			{
