@@ -72,6 +72,17 @@ RESOURCES = { "groups": [
 			"url": "https://bitcointalk.org/index.php?board=77.0",
 			"description": ""
 			},
+			{
+			"name": "The Daily Bitcoin",
+			"url": "http://thedailybitcoin.com/",
+			"description": ""
+			},
+			{
+			"name": "CryptoJunky",
+			"url": "http://cryptojunky.com/blog/",
+			"description": ""
+			},
+			
 		],
 	},
 	{
@@ -95,16 +106,11 @@ RESOURCES = { "groups": [
 		],
 	},
 	{
-		"name": "Videos",
+		"name": "Culture",
 		"items": [
 			{
 			"name": "BitcoinFilm.org",
 			"url": "http://bitcoinfilm.org/",
-			"description": ""
-			},
-			{
-			"name": "",
-			"url": "",
 			"description": ""
 			},
 			{
@@ -118,6 +124,11 @@ RESOURCES = { "groups": [
 		"name": "Learning",
 		"items": [
 			{
+			"name": "How Bitcoin Works Under the Hood",
+			"url": "https://www.youtube.com/watch?v=Lx9zgZCMqXE",
+			"description": ""
+			},
+			{
 			"name": "Khan Academy",
 			"url": "https://www.khanacademy.org/economics-finance-domain/core-finance/money-and-banking/bitcoin/v/bitcoin-what-is-it",
 			"description": ""
@@ -126,12 +137,7 @@ RESOURCES = { "groups": [
 			"name": "Let's Talk Bitcoin",
 			"url": "http://letstalkbitcoin.com/",
 			"description": ""
-			},
-			{
-			"name": "",
-			"url": "",
-			"description": ""
-			},
+			},	
 		],
 	},
 	{
@@ -155,6 +161,21 @@ RESOURCES = { "groups": [
 			{
 			"name": "Bitcoin Charts",
 			"url": "http://bitcoincharts.com/charts/",
+			"description": ""
+			},
+			{
+			"name": "ZeroBlock",
+			"url": "http://www.zeroblock.com/",
+			"description": ""
+			},
+			{
+			"name": "ZeroBlock",
+			"url": "http://www.zeroblock.com/",
+			"description": ""
+			},
+			{
+			"name": "RTBTC",
+			"url": "http://bitcoin.clarkmoody.com/",
 			"description": ""
 			},
 		],
@@ -218,14 +239,14 @@ RESOURCES = { "groups": [
 		"name": "Data",
 		"items": [
 			{
-			"name": "CoinDesk Bitcoin Price Index",
-			"url": "http://www.coindesk.com/price/",
-			"description": "An average of bitcoin prices across leading global exchanges that meet criteria specified by the BPI."
-			},
-			{
 			"name": "Quandl Bitcoin Datasets",
 			"url": "http://www.quandl.com/search/bitcoin",
 			"description": "Listing of various Bitcoin datasets."
+			},
+			{
+			"name": "CoinDesk Bitcoin Price Index",
+			"url": "http://www.coindesk.com/price/",
+			"description": "An average of bitcoin prices across leading global exchanges that meet criteria specified by the BPI."
 			},
 		],
 	},
