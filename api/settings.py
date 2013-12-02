@@ -55,7 +55,7 @@ RESOURCES = { "groups": [
 			{
 			"name": "CoinDesk",
 			"url": "http://www.coindesk.com/",
-			"description": ""
+			"description": "Covers news and analysis on the trends, price movements, technologies, companies and people in the bitcoin and digital currency world."
 			},
 			{
 			"name": "The Genesis Block",
@@ -115,31 +115,6 @@ RESOURCES = { "groups": [
 		],
 	},
 	{
-		"name": "Charts",
-		"items": [
-			{
-			"name": "Bitcoin Wisdom",
-			"url": "http://bitcoinwisdom.com/",
-			"description": "Live Bitcoin/Litecoin charts."
-			},
-			{
-			"name": "BitcoinX",
-			"url": "http://www.bitcoinx.com/",
-			"description": "A variety of tools and charts, including financial and technical data, related to the bitcoin network and markets."
-			},
-			{
-			"name": "Bitcoin Charts",
-			"url": "http://bitcoincharts.com/charts/",
-			"description": ""
-			},
-			{
-			"name": "Coin Market Cap",
-			"url": "http://coinmarketcap.com/",
-			"description": "Crypto-Currency Market Capitalizations"
-			},
-		],
-	},
-	{
 		"name": "Learning",
 		"items": [
 			{
@@ -155,6 +130,31 @@ RESOURCES = { "groups": [
 			{
 			"name": "",
 			"url": "",
+			"description": ""
+			},
+		],
+	},
+	{
+		"name": "Charts",
+		"items": [
+			{
+			"name": "Bitcoin Wisdom",
+			"url": "http://bitcoinwisdom.com/",
+			"description": "Live Bitcoin/Litecoin charts."
+			},
+			{
+			"name": "Coin Market Cap",
+			"url": "http://coinmarketcap.com/",
+			"description": "Crypto-Currency Market Capitalizations"
+			},
+			{
+			"name": "BitcoinX",
+			"url": "http://www.bitcoinx.com/",
+			"description": "A variety of tools and charts, including financial and technical data, related to the bitcoin network and markets."
+			},
+			{
+			"name": "Bitcoin Charts",
+			"url": "http://bitcoincharts.com/charts/",
 			"description": ""
 			},
 		],
@@ -180,7 +180,7 @@ RESOURCES = { "groups": [
 		],
 	},
 	{
-		"name": "Merchants",
+		"name": "Coin Merchants",
 		"items": [
 			{
 			"name": "useBitcoins.info",
@@ -196,6 +196,36 @@ RESOURCES = { "groups": [
 			"name": "",
 			"url": "",
 			"description": ""
+			},
+		],
+	},
+	{
+		"name": "Merchant Tools",
+		"items": [
+			{
+			"name": "Shopping Cart Interfaces",
+			"url": "https://en.bitcoin.it/wiki/Category:Shopping_Cart_Interfaces",
+			"description": "Software for providing online shopping websites a method for handling payment in bitcoins."
+			},
+			{
+			"name": "Bitcoin100",
+			"url": "http://bitcoin100.org/",
+			"description": "Bitcoin100 donates the Bitcoin equivalent of $1000 to charities that prominently display an option for supporters to contribute via Bitcoin on their website."
+			},
+		],
+	},
+	{
+		"name": "Data",
+		"items": [
+			{
+			"name": "CoinDesk Bitcoin Price Index",
+			"url": "http://www.coindesk.com/price/",
+			"description": "An average of bitcoin prices across leading global exchanges that meet criteria specified by the BPI."
+			},
+			{
+			"name": "Quandl Bitcoin Datasets",
+			"url": "http://www.quandl.com/search/bitcoin",
+			"description": "Listing of various Bitcoin datasets."
 			},
 		],
 	},
