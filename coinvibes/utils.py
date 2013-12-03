@@ -67,5 +67,3 @@ class ProxiedRequest(Request):
         private_ip = (ip.startswith('10.') or ip.startswith('172.16.') or ip.startswith('192.168.'))
         local_ip = (ip == '127.0.0.1' or ip == '0.0.0.0')
         return blank_ip or private_ip or local_ip
-
-

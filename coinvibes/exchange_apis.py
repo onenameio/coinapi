@@ -307,8 +307,66 @@ class CoinbaseAPI(ExchangeAPI):
 
 		return ticker
 
+class BterAPI(ExchangeAPI):
+	def __init__(self):
+		self.name = 'Bter'
+		self.slug = 'bter'
+		self.base_url = 'https://bter.com/api/1'
+		self.tickers = {
+			('btc', 'cny'): { 'url': '/ticker/btc_cny' },
+			('ltc', 'cny'): { 'url': '/ticker/ltc_cny' },
+			('nmc', 'cny'): { 'url': '/ticker/nmc_cny' },
+			('ppc', 'cny'): { 'url': '/ticker/ppc_cny' },
+			#('trc', 'cny'): { 'url': '/ticker/trc_cny' },
+			('xpm', 'cny'): { 'url': '/ticker/xpm_cny' },
+			('ftc', 'cny'): { 'url': '/ticker/ftc_cny' },
+			('frc', 'cny'): { 'url': '/ticker/frc_cny' },
+			('pts', 'cny'): { 'url': '/ticker/pts_cny' },
+			('qrk', 'cny'): { 'url': '/ticker/qrk_cny' },
+			#('nvc', 'cny'): { 'url': '/ticker/nvc_cny' },
+			('mec', 'cny'): { 'url': '/ticker/mec_cny' },
+			('wdc', 'cny'): { 'url': '/ticker/wdc_cny' },
+
+			#('ftc', 'ltc'): { 'url': '/ticker/ftc_ltc' },
+			#('frc', 'ltc'): { 'url': '/ticker/frc_ltc' },
+			#('ppc', 'ltc'): { 'url': '/ticker/ppc_ltc' },
+			#('nmc', 'ltc'): { 'url': '/ticker/nmc_ltc' },
+			#('trc', 'ltc'): { 'url': '/ticker/trc_ltc' },
+			#('wdc', 'ltc'): { 'url': '/ticker/wdc_ltc' },
+
+			('ltc', 'btc'): { 'url': '/ticker/ltc_btc' },
+			('nmc', 'btc'): { 'url': '/ticker/nmc_btc' },
+			('ppc', 'btc'): { 'url': '/ticker/ppc_btc' },
+			#('trc', 'btc'): { 'url': '/ticker/trc_btc' },
+			('xpm', 'btc'): { 'url': '/ticker/xpm_btc' },
+
+			('ftc', 'btc'): { 'url': '/ticker/ftc_btc' },
+			('frc', 'btc'): { 'url': '/ticker/frc_btc' },
+			('pts', 'btc'): { 'url': '/ticker/pts_btc' },
+			('qrk', 'btc'): { 'url': '/ticker/qrk_btc' },
+			#('nvc', 'btc'): { 'url': '/ticker/nvc_btc' },
+			('mec', 'btc'): { 'url': '/ticker/mec_btc' },
+			('wdc', 'btc'): { 'url': '/ticker/wdc_btc' },
+		}
+
+	def ticker(self, quote_currency, base_currency):
+		ticker_data = self.ticker_data(quote_currency, base_currency)
+		print ticker_data
+
+		ticker = {
+			'price_units': base_currency,
+			'bid': ticker_data['buy'],
+			'ask': ticker_data['sell'],
+			'last': ticker_data['last'],
+			'high': ticker_data['high'],
+			'low': ticker_data['low'],
+			'average': ticker_data['avg'],
+		}
+
+		return ticker
+
 EXCHANGE_APIS = [
 	BitstampAPI(), MtGoxAPI(), BTCeAPI(), KrakenAPI(), BTCChinaAPI(),
-	BitfinexAPI(), CoinbaseAPI()
+	BitfinexAPI(), CoinbaseAPI(), BterAPI()
 ]
 
