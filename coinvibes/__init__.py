@@ -13,4 +13,4 @@ import analytics
 analytics.init('5asae1e0a2gpb8uu0sx0')
 
 ## use HerokuRequest class so we get real IPs
-app.request_class = utils.HerokuRequest
+app.request_class = utils.ProxiedRequest
