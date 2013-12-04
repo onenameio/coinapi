@@ -15,12 +15,12 @@
 
                 <div class="row-fluid">
                 <div class="span6">
-                {% for resource_group in resources['groups'][:((resources.groups|length)/2|round)|int] %}
+                {% for resource_group in resources['column_1'] %}
                     {{ macros.resource_group(resource_group) }}
                 {% endfor %}
                 </div>
                 <div class="span6">
-                {% for resource_group in resources['groups'][((resources.groups|length)/2|round)|int:] %}
+                {% for resource_group in resources['column_2'] %}
                     {{ macros.resource_group(resource_group) }}
                 {% endfor %}
                 </div>

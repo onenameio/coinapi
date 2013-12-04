@@ -444,6 +444,22 @@ class BterAPI(ExchangeAPI):
 			'average': raw_ticker['avg'],
 		}
 
+"""
+
+Cryptsy
+url: http://pubapi.cryptsy.com/api.php?method=marketdata
+FRC/BTC, marketid: 39
+FTC/BTC, marketid: 5
+LTC/BTC, marketid: 3
+NMC/BTC, marketid: 29
+NVC/BTC, marketid: 13
+PPC/BTC, marketid: 28
+PTS/BTC, marketid: 119
+QRK/BTC, marketid: 71
+TRC/BTC, marketid: 27
+
+"""
+
 master_exchange_api = MasterExchangeAPI([
 	BitstampAPI(), MtGoxAPI(), BTCeAPI(), KrakenAPI(), BTCChinaAPI(),
 	BitfinexAPI(), CoinbaseAPI(), BterAPI()
