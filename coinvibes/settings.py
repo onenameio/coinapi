@@ -66,6 +66,11 @@ RESOURCES = { "groups": [
 		"name": "News",
 		"items": [
 			{
+			"name": "/r/bitcoin",
+			"url": "http://www.reddit.com/r/Bitcoin",
+			"description": "The Bitcoin subreddit."
+			},
+			{
 			"name": "CoinDesk",
 			"url": "http://www.coindesk.com/",
 			"description": "Covers news and analysis on the trends, price movements, technologies, companies and people in the bitcoin and digital currency world."
@@ -162,6 +167,11 @@ RESOURCES = { "groups": [
 			"description": "Live Bitcoin/Litecoin charts."
 			},
 			{
+			"name": "Bitcoinity",
+			"url": "http://bitcoinity.org/markets",
+			"description": ""
+			},
+			{
 			"name": "Coin Market Cap",
 			"url": "http://coinmarketcap.com/",
 			"description": "Crypto-Currency Market Capitalizations"
@@ -174,11 +184,6 @@ RESOURCES = { "groups": [
 			{
 			"name": "Bitcoin Charts",
 			"url": "http://bitcoincharts.com/charts/",
-			"description": ""
-			},
-			{
-			"name": "ZeroBlock",
-			"url": "http://www.zeroblock.com/",
 			"description": ""
 			},
 			{
