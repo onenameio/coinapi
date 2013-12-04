@@ -94,6 +94,12 @@ class MtGoxAPI(ExchangeAPI):
 			('btc', 'sek'): { 'url': '/BTCSEK/money/ticker' },
 			('btc', 'sgd'): { 'url': '/BTCSGD/money/ticker' },
 			('btc', 'thb'): { 'url': '/BTCTHB/money/ticker' },
+			#('ltc', 'usd'): { 'url': '/LTCUSD/money/ticker' },
+			#('ltc', 'cny'): { 'url': '/LTCCNY/money/ticker' },
+			#('ltc', 'jpy'): { 'url': '/LTCJPY/money/ticker' },
+			#('ltc', 'eur'): { 'url': '/LTCEUR/money/ticker' },
+			#('ltc', 'cad'): { 'url': '/LTCCAD/money/ticker' },
+			#('nmc', 'usd'): { 'url': '/NMCUSD/money/ticker' },
 		}
 
 	def ticker(self, quote_currency, base_currency):
@@ -320,12 +326,12 @@ class BterAPI(ExchangeAPI):
 			#('trc', 'cny'): { 'url': '/ticker/trc_cny' },
 			('xpm', 'cny'): { 'url': '/ticker/xpm_cny' },
 			('ftc', 'cny'): { 'url': '/ticker/ftc_cny' },
-			('frc', 'cny'): { 'url': '/ticker/frc_cny' },
+			#('frc', 'cny'): { 'url': '/ticker/frc_cny' },
 			('pts', 'cny'): { 'url': '/ticker/pts_cny' },
-			('qrk', 'cny'): { 'url': '/ticker/qrk_cny' },
+			#('qrk', 'cny'): { 'url': '/ticker/qrk_cny' },
 			#('nvc', 'cny'): { 'url': '/ticker/nvc_cny' },
-			('mec', 'cny'): { 'url': '/ticker/mec_cny' },
-			('wdc', 'cny'): { 'url': '/ticker/wdc_cny' },
+			#('mec', 'cny'): { 'url': '/ticker/mec_cny' },
+			#('wdc', 'cny'): { 'url': '/ticker/wdc_cny' },
 
 			#('ftc', 'ltc'): { 'url': '/ticker/ftc_ltc' },
 			#('frc', 'ltc'): { 'url': '/ticker/frc_ltc' },
@@ -341,12 +347,12 @@ class BterAPI(ExchangeAPI):
 			('xpm', 'btc'): { 'url': '/ticker/xpm_btc' },
 
 			('ftc', 'btc'): { 'url': '/ticker/ftc_btc' },
-			('frc', 'btc'): { 'url': '/ticker/frc_btc' },
+			#('frc', 'btc'): { 'url': '/ticker/frc_btc' },
 			('pts', 'btc'): { 'url': '/ticker/pts_btc' },
-			('qrk', 'btc'): { 'url': '/ticker/qrk_btc' },
+			#('qrk', 'btc'): { 'url': '/ticker/qrk_btc' },
 			#('nvc', 'btc'): { 'url': '/ticker/nvc_btc' },
-			('mec', 'btc'): { 'url': '/ticker/mec_btc' },
-			('wdc', 'btc'): { 'url': '/ticker/wdc_btc' },
+			#('mec', 'btc'): { 'url': '/ticker/mec_btc' },
+			#('wdc', 'btc'): { 'url': '/ticker/wdc_btc' },
 		}
 
 	def ticker(self, quote_currency, base_currency):
