@@ -221,6 +221,31 @@ RESOURCES = { "groups": [
 			"url": "https://multibit.org/",
 			"description": "A lightweight Bitcoin client."
 			},
+			{
+			"name": "Armory",
+			"url": "https://bitcoinarmory.com/",
+			"description": "A high security Bitcoin client."
+			},
+			{
+			"name": "Electrum",
+			"url": "http://electrum.org/",
+			"description": "A fast, simple Bitcoin client."
+			},
+			{
+			"name": "Mycelium",
+			"url": "https://play.google.com/store/apps/details?id=com.mycelium.wallet",
+			"description": "A mobile wallet for Android phones."
+			},
+			{
+			"name": "Coinbase",
+			"url": "https://play.google.com/store/apps/details?id=com.coinbase.android",
+			"description": "A mobile wallet for Android phones."
+			},
+			{
+			"name": "Blockchain.info",
+			"url": "https://blockchain.info/wallet/chrome-extension",
+			"description": "A browser-based Bitcoin client."
+			},
 		],
 	},
 	{
