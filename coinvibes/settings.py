@@ -1,6 +1,6 @@
-DEBUG = False
+DEBUG = True
 
-CURRENCY_PAIRS = [
+"""CURRENCY_PAIRS = [
 	{ 'name': 'Bitcoin / US Dollars', 'symbols': ('btc','usd') },
 	{ 'name': 'Bitcoin / Euros', 'symbols': ('btc','eur') },
 	{ 'name': 'Bitcoin / Chinese Yuan', 'symbols': ('btc','cny') },
@@ -13,11 +13,11 @@ CURRENCY_PAIRS = [
 	{ 'name': 'Bitcoin / Hong Kong Dollars', 'symbols': ('btc','hkd') },
 	{ 'name': 'Bitcoin / Norwegian Kroner', 'symbols': ('btc','nok') },
 	{ 'name': 'Bitcoin / New Zealand Dollars', 'symbols': ('btc','nzd') },
-	{ 'name': 'Bitcoin / Polish Zloty', 'symbols': ('btc','pln') },
-	{ 'name': 'Bitcoin / Russian Rubles', 'symbols': ('btc','rub') },
-	{ 'name': 'Bitcoin / Swedish Kroner', 'symbols': ('btc','sek') },
-	{ 'name': 'Bitcoin / Singapore Dollars', 'symbols': ('btc','sgd') },
-	{ 'name': 'Bitcoin / Thai Bahts', 'symbols': ('btc','thb') },
+	{ 'name': 'Bitcoin / Polish zloty', 'symbols': ('btc','pln') },
+	{ 'name': 'Bitcoin / Russian rubles', 'symbols': ('btc','rub') },
+	{ 'name': 'Bitcoin / Swedish kroner', 'symbols': ('btc','sek') },
+	{ 'name': 'Bitcoin / Singapore dollars', 'symbols': ('btc','sgd') },
+	{ 'name': 'Bitcoin / Thai bahts', 'symbols': ('btc','thb') },
 	
 	{ 'name': 'Litecoin / US Dollars', 'symbols': ('ltc','usd') },
 	{ 'name': 'Litecoin / Euros', 'symbols': ('ltc','eur') },
@@ -29,7 +29,9 @@ CURRENCY_PAIRS = [
 	{ 'name': 'Primecoin / Bitcoin', 'symbols': ('xpm','btc') },
 	{ 'name': 'Novacoin / Bitcoin', 'symbols': ('nvc','btc') },
 	{ 'name': 'Terracoin / Bitcoin', 'symbols': ('trc','btc') },
-]
+]"""
+
+
 
 RESOURCES = { "groups": [
 	{

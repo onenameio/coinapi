@@ -39,16 +39,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for endpoint_key in exchange.tickers %}
+                        {% for currency_pair in exchange.currency_pairs %}
                         <tr id="class-summary">
                             <td style="width: 150px;">
-                                <p class="class-scope">{{endpoint_key[0]}}/{{endpoint_key[1]}}</p>
+                                <p class="class-scope">{{currency_pair[0]}}/{{currency_pair[1]}}</p>
                             </td>
                             <td class="">
-                                <a href="{{ api_prefix }}/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}">{{ api_prefix }}/tickers/{{ exchange.slug }}/{{endpoint_key[0]}}_{{endpoint_key[1]}}</a>
-                                <!--<p class="class-desc">
-                                    {{endpoint_key[0]}} -> {{endpoint_key[1]}}
-                                </p>-->
+                                <a href="{{ api_prefix }}/tickers/{{ exchange.slug }}/{{currency_pair[0]}}_{{currency_pair[1]}}">{{ api_prefix }}/tickers/{{ exchange.slug }}/{{currency_pair[0]}}_{{currency_pair[1]}}</a>
+                               
                             </td>
                         </tr>
                         {% endfor %}

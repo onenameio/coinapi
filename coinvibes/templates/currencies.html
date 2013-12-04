@@ -28,18 +28,18 @@
                 <table class="table table-bordered table-condensed">
                     <thead>
                         <tr>
-                            <th colspan="2">{{ currency_pair.name }}</th>
+                            <th colspan="2">{{ currency_pair.quote_currency.name }} ({{ currency_pair.quote_currency.code|upper }}) / {{ currency_pair.base_currency.name }} ({{ currency_pair.base_currency.code|upper }})</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for exchange in exchanges %}
-                        {% if currency_pair.symbols in exchange.tickers %}
+                        {% if (currency_pair.quote_currency.code, currency_pair.base_currency.code) in exchange.currency_pairs %}
                         <tr id="class-summary">
                             <td style="width: 150px;">
                                 <p class="class-scope">{{ exchange.name }}</p>
                             </td>
                             <td class="">
-                                <a href="{{ api_prefix }}/tickers/{{ exchange.slug }}/{{ currency_pair.symbols[0] }}_{{ currency_pair.symbols[1] }}">{{ api_prefix }}/tickers/{{ exchange.slug }}/{{ currency_pair.symbols[0] }}_{{ currency_pair.symbols[1] }}</a>
+                                <a href="{{ api_prefix }}/tickers/{{ exchange.slug }}/{{ currency_pair.quote_currency.code }}_{{ currency_pair.base_currency.code }}">{{ api_prefix }}/tickers/{{ exchange.slug }}/{{ currency_pair.quote_currency.code }}_{{ currency_pair.base_currency.code }}</a>
                             </td>
                         </tr>
                         {% endif %}

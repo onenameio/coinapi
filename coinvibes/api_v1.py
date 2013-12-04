@@ -5,12 +5,13 @@ import time
 from flask import render_template, Response, request, jsonify, abort
 
 from coinvibes import app
-from coinvibes.exchange_apis import get_exchange_api, get_exchange_api_tickers,\
-	EXCHANGE_APIS
+
 from coinvibes.utils import APIError, identify_user
-from coinvibes.settings import RESOURCES, CURRENCY_PAIRS
+from coinvibes.settings import RESOURCES
 
 import analytics
+
+from coinvibes.exchange_apis import master_exchange_api
 
 @app.route('/api/v1')
 @identify_user
@@ -33,8 +34,8 @@ def all_tickers():
 
 	data = { 'exchanges': [] }
 
-	for exchange_api in EXCHANGE_APIS:
-		data['exchanges'].append(get_exchange_api_tickers(exchange_api))
+	for exchange_api in master_exchange_api.exchange_apis:
+		data['exchanges'].append(master_exchange_api.get_exchange_data(exchange_api.slug))
 
 	return jsonify(data), 200
 
@@ -44,12 +45,10 @@ def all_currency_pairs_on_exchange(exchange_slug):
 	analytics.track(request.remote_addr, 'API: exchange tickers', {
 		'exchange': exchange_slug,
 	})
-
-	exchange_api = get_exchange_api(exchange_slug, EXCHANGE_APIS)
-	if not exchange_api:
+	
+	data = master_exchange_api.get_exchange_data(exchange_slug)
+	if not data:
 		abort(404)
-
-	data = get_exchange_api_tickers(exchange_api)
 
 	return jsonify(data), 200
 
@@ -62,7 +61,7 @@ def currency_pair_on_exchange(exchange_slug, quote_currency, base_currency):
 		'base_currency': base_currency
 	})
 
-	exchange_api = get_exchange_api(exchange_slug, EXCHANGE_APIS)
+	exchange_api = master_exchange_api.get_exchange_api(exchange_slug)
 	if not exchange_api:
 		abort(404)
 
