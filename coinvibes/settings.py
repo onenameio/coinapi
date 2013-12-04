@@ -177,6 +177,11 @@ RESOURCES = { "groups": [
 			"description": "Crypto-Currency Market Capitalizations"
 			},
 			{
+			"name": "Cryptocoin Charts",
+			"url": "http://www.cryptocoincharts.info/",
+			"description": "Charts for basically any currency pair you can think of."
+			},
+			{
 			"name": "BitcoinX",
 			"url": "http://www.bitcoinx.com/",
 			"description": "A variety of tools and charts, including financial and technical data, related to the bitcoin network and markets."
