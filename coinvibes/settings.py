@@ -271,6 +271,11 @@ RESOURCES = {
 				"url": "http://bitcoin-analytics.com/",
 				"description": ""
 				},
+				{
+				"name": "BitcoinAverage",
+				"url": "https://bitcoinaverage.com",
+				"description": ""
+				},
 			],
 		},
 		{
